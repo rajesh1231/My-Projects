@@ -9,7 +9,7 @@ DATA.c1.topics = [
   { id:'easy', ta:'எளிய சொற்கள்', en:'Easy words (no vowel signs)', words:[
     ['மரம்','tree','🌳'],['படம்','picture','🖼️'],['கடல்','sea','🌊'],['மலர்','flower','🌸'],['பழம்','fruit','🍎'],
     ['பணம்','money','💰'],['நகம்','nail','💅'],['அவன்','he','👦'],['அவள்','she','👧'],['வடம்','rope','🪢']]},
-  { id:'aawords', ta:'ஆ ஓசைச் சொற்கள்', en:'Words with the long "aa" sign ா', words:[
+  { id:'aawords', ta:'ஆ ஓசைச் சொற்கள்', en:'Words with the long aa sound (கா)', words:[
     ['பால்','milk','🥛'],['கால்','leg','🦵'],['வால்','tail','🐒'],['மான்','deer','🦌'],['காகம்','crow','🐦‍⬛'],
     ['பாடம்','lesson','📖'],['வானம்','sky','🌌'],['நாடகம்','drama','🎭'],['தாமரை','lotus','🪷'],['யானை','elephant','🐘']]},
   { id:'family', ta:'குடும்பம்', en:'Family', words:[

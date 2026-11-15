@@ -65,7 +65,7 @@ body.no-tl .tl.keep, body.no-en .en.keep { visibility: visible; }
 .cls-switch { display: inline-flex; border: 1px solid var(--leaf); border-radius: 999px; overflow: hidden; }
 .cls-switch button { border: 0; background: var(--surface); color: var(--leaf); padding: 5px 14px; font-weight: 700; font-size: .9rem; }
 .cls-switch button[aria-pressed="true"] { background: var(--leaf); color: var(--surface); }
-body.c1 [data-only="3"], body.c3 [data-only="1"] { display: none !important; }
+body.c1 [data-only]:not([data-only~="1"]), body.c2 [data-only]:not([data-only~="2"]), body.c3 [data-only]:not([data-only~="3"]) { display: none !important; }
 
 /* panels */
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 14px; min-width: 0; }
@@ -196,9 +196,9 @@ footer { color: var(--muted); font-size: .85rem; padding-block: 0 40px; }
   <div class="wrap">
     <div class="brand">
       <h1>Amma's <span>Tamil</span> Class</h1>
-      <p>Class 1 and Class 3 Tamil, explained in Tanglish and English, so any parent can teach it.</p>
+      <p>Class 1, 2 and 3 Tamil, explained in Tanglish and English, so any parent can teach it.</p>
     </div>
-    <div class="toggles"><div class="cls-switch" role="group" aria-label="Class"><button type="button" data-cls="1">Class 1</button><button type="button" data-cls="3">Class 3</button></div>
+    <div class="toggles"><div class="cls-switch" role="group" aria-label="Class"><button type="button" data-cls="1">Class 1</button><button type="button" data-cls="2">Class 2</button><button type="button" data-cls="3">Class 3</button></div>
       <div class="toggles" role="group" aria-label="Helpers">
       <label class="toggle"><input type="checkbox" id="opt-tl" checked> Tanglish</label>
       <label class="toggle"><input type="checkbox" id="opt-en" checked> English</label>
@@ -240,8 +240,8 @@ footer { color: var(--muted); font-size: .85rem; padding-block: 0 40px; }
         <p>Tamil has three "n" letters, two "l" letters and two "r" letters. In the letter charts the hard ones are written with a capital letter: <b class="tl keep">N</b> (ண), <b class="tl keep">L</b> (ள), <b class="tl keep">R</b> (ற). Inside words they are written in small letters, the way people type Tamil on WhatsApp.</p>
       </div>
 
-      <div class="panel" data-only="3">
-        <h3>A simple weekly plan for Class 3</h3>
+      <div class="panel" data-only="2 3">
+        <h3>A simple weekly plan</h3>
         <div class="scroll-x" style="border:0">
         <table class="week">
           <thead><tr><th>Day</th><th>What to do (15–20 min)</th></tr></thead>
@@ -277,11 +277,14 @@ footer { color: var(--muted); font-size: .85rem; padding-block: 0 40px; }
 
       <div class="note" data-only="1"><b>About the syllabus:</b> this covers what is usually taught in Class 1 Tamil in CBSE schools, including Sri Chaitanya: the 12 vowels and 18 consonants, the க, கா rows of the letter chart, simple words with pictures, the first letter of a word, this and that, rhymes and very short stories. Your child's school book may have its own lessons. For those, use the <a href="#homework">Homework helper</a>.</div>
 
+      <div class="note" data-only="2"><b>About the syllabus:</b> this covers what is usually taught in Class 2 Tamil in CBSE schools, including Sri Chaitanya: the full uyirmei chart, reading words with every vowel sign (கி, கு, கெ, கொ…), family, body, colours, numbers 1–20, animals, birds, fruits, days of the week, naming and action words, singular and plural, opposites, male and female words, this/these, question words, Aathichoodi, rhymes and short stories. Your child's school book may have its own lessons. For those, use the <a href="#homework">Homework helper</a>.</div>
+
       <div class="note" data-only="3"><b>About the syllabus:</b> this site covers the topics usually taught in Class 3 Tamil (second language) in CBSE schools, including Sri Chaitanya: letters and the uyirmei chart, everyday words, singular and plural, opposites, male and female words, tenses, Aathichoodi, Thirukkural, rhymes and short stories. Your child's school book may have its own lessons and poems. For those, use the <a href="#homework">Homework helper</a>, which works with any Tamil text.</div>
     </section>
 
     <section class="view" id="view-letters" hidden>
       <div><h2>Letters <span class="ta">எழுத்துகள்</span></h2>
+        <div class="note" data-only="2"><b>For Class 2:</b> learn the whole uyirmei chart, one row a day. Then read the words with vowel signs in the <a href="#words">Words</a> tab.</div>
         <div class="note" data-only="1"><b>For Class 1:</b> learn the 12 vowels first, then the 18 consonants. In the big chart, only the first two columns (க, கா…) are needed this year.</div>
         <p class="lead">Tamil has 12 vowels (உயிர் எழுத்துகள்), 18 consonants (மெய் எழுத்துகள்) and one special letter ஃ. A consonant joined with a vowel makes an uyirmei letter (உயிர்மெய்): க் + அ = க.</p></div>
       <div class="panel"><div class="panel-head"><h3>Vowels</h3><span class="ta">உயிர் எழுத்துகள்</span><span class="en">uyir ezhutthugal · 12 letters</span></div>
@@ -675,7 +678,7 @@ DATA.c1.topics = [
   { id:'easy', ta:'எளிய சொற்கள்', en:'Easy words (no vowel signs)', words:[
     ['மரம்','tree','🌳'],['படம்','picture','🖼️'],['கடல்','sea','🌊'],['மலர்','flower','🌸'],['பழம்','fruit','🍎'],
     ['பணம்','money','💰'],['நகம்','nail','💅'],['அவன்','he','👦'],['அவள்','she','👧'],['வடம்','rope','🪢']]},
-  { id:'aawords', ta:'ஆ ஓசைச் சொற்கள்', en:'Words with the long "aa" sign ா', words:[
+  { id:'aawords', ta:'ஆ ஓசைச் சொற்கள்', en:'Words with the long aa sound (கா)', words:[
     ['பால்','milk','🥛'],['கால்','leg','🦵'],['வால்','tail','🐒'],['மான்','deer','🦌'],['காகம்','crow','🐦‍⬛'],
     ['பாடம்','lesson','📖'],['வானம்','sky','🌌'],['நாடகம்','drama','🎭'],['தாமரை','lotus','🪷'],['யானை','elephant','🐘']]},
   { id:'family', ta:'குடும்பம்', en:'Family', words:[
@@ -791,6 +794,71 @@ DATA.c1.stories = [
       ['அம்மாவின் பெயர் என்ன?','What is the mother\'s name?','லதா.','Latha.'],
       ['தங்கையின் பெயர் என்ன?','What is the sister\'s name?','மீனா.','Meena.']] }
 ];
+/* Lesson content for Class 2 Tamil. Reuses some Class 3 / Class 1 word lists. */
+DATA.c2 = {};
+(function () {
+  function t3(id) { return DATA.c3.topics.filter(function (t) { return t.id === id; })[0]; }
+  function cut(id, n, en) { var t = t3(id); return { id:t.id, ta:t.ta, en:en || t.en, words:t.words.slice(0, n) }; }
+  function g3(id) { return DATA.c3.grammar.filter(function (g) { return g.id === id; })[0]; }
+  function p(src, id) { return src.filter(function (x) { return x.id === id; })[0]; }
+
+  DATA.c2.topics = [
+    { id:'isigns', ta:'இ, ஈ ஓசைச் சொற்கள்', en:'Words with கி, கீ sounds', words:[
+      ['கிளி','parrot','🦜'],['விரல்','finger','☝️'],['மிளகு','pepper','🌶️'],['பின்','back / behind','🔙'],
+      ['மீன்','fish','🐟'],['தீ','fire','🔥'],['வீடு','house','🏠'],['கீரை','spinach / greens','🥬'],['நீலம்','blue','🔵'],['சீப்பு','comb','🪮']]},
+    { id:'usigns', ta:'உ, ஊ ஓசைச் சொற்கள்', en:'Words with கு, கூ sounds', words:[
+      ['குடை','umbrella','☂️'],['புலி','tiger','🐅'],['முயல்','rabbit','🐇'],['குருவி','sparrow','🐦'],
+      ['பூ','flower','🌼'],['பூனை','cat','🐈'],['சூரியன்','sun','☀️'],['தூண்','pillar','🏛️'],['நூல்','thread / book','🧵'],['கூடை','basket','🧺']]},
+    { id:'esigns', ta:'எ, ஏ, ஐ ஓசைச் சொற்கள்', en:'Words with கெ, கே, கை sounds', words:[
+      ['பெட்டி','box','📦'],['தென்னை','coconut tree','🌴'],['செருப்பு','slipper','🩴'],['மேகம்','cloud','☁️'],
+      ['தேன்','honey','🍯'],['தேர்','temple chariot','🛕'],['மேசை','table','🪑'],['மலை','mountain','⛰️'],['கை','hand','✋'],['பை','bag','🎒']]},
+    { id:'osigns', ta:'ஒ, ஓ, ஔ ஓசைச் சொற்கள்', en:'Words with கொ, கோ, கௌ sounds', words:[
+      ['கொடி','flag','🚩'],['பொம்மை','toy / doll','🧸'],['தொப்பி','cap','🧢'],['கோழி','hen','🐔'],
+      ['தோசை','dosa','🥞'],['ரோஜா','rose','🌹'],['மோர்','buttermilk','🥛'],['வௌவால்','bat','🦇'],['மௌனம்','silence','🤫']]},
+    t3('family'), t3('body'), cut('colours', 8), cut('numbers', 20, 'Numbers 1 to 20'), t3('animals'), t3('birds'),
+    t3('fruits'), cut('vegetables', 8), cut('days', 7), t3('school'), t3('nature'), t3('verbs')
+  ];
+
+  DATA.c2.phrases = DATA.c3.phrases;
+
+  DATA.c2.grammar = [
+    g3('noun'), g3('verb'), g3('number'),
+    { id:'opposite', ta:'எதிர்ச்சொல்', en:'Opposite words',
+      explain:'Say one word, the child says the opposite. A common question in Class 2 tests.',
+      cols:['Word','Opposite','Meaning'],
+      rows:[['பெரிய','சிறிய','big – small'],['மேலே','கீழே','up – down'],['உள்ளே','வெளியே','inside – outside'],['பகல்','இரவு','day – night'],
+            ['வா','போ','come – go'],['சூடு','குளிர்','hot – cold'],['நல்ல','கெட்ட','good – bad'],['முன்','பின்','front – back'],['புதிய','பழைய','new – old']] },
+    { id:'gender', ta:'ஆண்பால் – பெண்பால்', en:'Male and female words',
+      explain:'அவன் = he, அவள் = she. Many male words end in ன், female words in ள் or இ.',
+      cols:['Male (ஆண்பால்)','Female (பெண்பால்)','Meaning'], rows:g3('gender').rows.slice(0, 7) },
+    { id:'thisthese', ta:'இது – இவை, அது – அவை', en:'This / these, that / those',
+      explain:'இது (idhu) = this, இவை (ivai) = these. அது (adhu) = that, அவை (avai) = those. When the word changes to "many", add கள் too.',
+      cols:['One','Many','Meaning'], taCols:2,
+      rows:[['இது மரம்.','இவை மரங்கள்.','This is a tree. → These are trees.'],['அது நாய்.','அவை நாய்கள்.','That is a dog. → Those are dogs.'],
+            ['இது பழம்.','இவை பழங்கள்.','This is a fruit. → These are fruits.'],['அது பறவை.','அவை பறவைகள்.','That is a bird. → Those are birds.'],
+            ['இது பூ.','இவை பூக்கள்.','This is a flower. → These are flowers.']] },
+    g3('question')
+  ];
+
+  DATA.c2.poems = [ p(DATA.c1.poems, 'amma'), p(DATA.c3.poems, 'aathichoodi'), p(DATA.c1.poems, 'kaiveesu'), p(DATA.c3.poems, 'nila'),
+    { id:'kural', ta:'திருக்குறள்', en:'Thirukkural (first verses)', about:'Two easy kurals that children learn first.', lines:p(DATA.c3.poems, 'kural').lines.slice(0, 2) } ];
+
+  DATA.c2.stories = [
+    { id:'lion', ta:'சிங்கமும் எலியும்', en:'The lion and the mouse',
+      lines:[['ஒரு காட்டில் ஒரு சிங்கம் தூங்கிக்கொண்டிருந்தது.','A lion was sleeping in a forest.'],
+        ['ஒரு எலி சிங்கத்தின் மேல் ஓடியது.','A mouse ran over the lion.'],
+        ['சிங்கம் கோபத்துடன் எலியைப் பிடித்தது.','The lion angrily caught the mouse.'],
+        ['"என்னை விட்டுவிடு, நான் உனக்கு உதவுவேன்" என்றது எலி.','"Let me go, I will help you," said the mouse.'],
+        ['சிங்கம் சிரித்துக்கொண்டே எலியை விட்டது.','The lion laughed and let the mouse go.'],
+        ['ஒரு நாள் சிங்கம் வலையில் மாட்டிக்கொண்டது.','One day the lion got caught in a net.'],
+        ['எலி வலையைக் கடித்து சிங்கத்தைக் காப்பாற்றியது.','The mouse bit the net and saved the lion.']],
+      moral:['யாரையும் சிறியவர் என்று நினைக்காதே.','Never think anyone is too small to help.'],
+      questions:[['சிங்கம் என்ன செய்துகொண்டிருந்தது?','What was the lion doing?','தூங்கிக்கொண்டிருந்தது.','It was sleeping.'],
+        ['சிங்கம் எதில் மாட்டிக்கொண்டது?','What did the lion get caught in?','வலையில்.','In a net.'],
+        ['சிங்கத்தை யார் காப்பாற்றியது?','Who saved the lion?','எலி.','The mouse.']] },
+    p(DATA.c3.stories, 'crow')
+  ];
+})();
 (function () {
   var D = window.DATA, tl = window.TamilTranslit.convert;
   var cls = '3', C = D.c3;
@@ -842,7 +910,7 @@ DATA.c1.stories = [
     box.addEventListener('change', apply); apply();
   }
   bindToggle('#opt-tl', 'no-tl'); bindToggle('#opt-en', 'no-en');
-  cls = store('cls') === '1' ? '1' : '3';
+  cls = ['1', '2', '3'].indexOf(store('cls')) >= 0 ? store('cls') : '3';
 
   /* ---------- card builders ---------- */
   function card(ta, tanglish, en, opts) {
@@ -902,7 +970,7 @@ DATA.c1.stories = [
   function renderClass() {
   C = D['c' + cls];
   window.TamilApp.hooks.forEach(function (f) { f(); });
-  document.body.classList.toggle('c1', cls === '1'); document.body.classList.toggle('c3', cls === '3');
+  ['1', '2', '3'].forEach(function (n) { document.body.classList.toggle('c' + n, cls === n); });
   document.querySelectorAll('.cls-switch button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cls === cls ? 'true' : 'false'); });
   chipBar($('#topic-chips'), C.topics, function (tp) {
     var p = $('#topic-panel');
@@ -1092,7 +1160,7 @@ DATA.c1.stories = [
   var views = ['start', 'letters', 'words', 'grammar', 'reading', 'practice', 'tests', 'homework'];
   function route() {
     var v = (location.hash || '#start').slice(1);
-    if (v === 'class1' || v === 'class3') { cls = v.slice(5); store('cls', cls); renderClass(); v = 'start'; }
+    if (v === 'class1' || v === 'class2' || v === 'class3') { cls = v.slice(5); store('cls', cls); renderClass(); v = 'start'; }
     if (views.indexOf(v) < 0) v = 'start';
     views.forEach(function (n) { $('#view-' + n).hidden = n !== v; });
     document.querySelectorAll('.tabs a').forEach(function (a) { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
@@ -1120,6 +1188,20 @@ DATA.c1.stories = [
                ['Find the word','find',4,{topics:['easy','aawords','home']}],['First letter','first',3,{topics:['easy','aawords','animals']}],
                ['One and many','pair',2,{g:'many'}],['Opposite words','pair',1,{g:'opposite'}],['This and that','gmean',1,{g:'thisthat'}],['Story','story',1,{}]],
         dictation: { label:'Write the word', topics:['easy','aawords'] } }
+    },
+    '2': {
+      t1: { topics: 'Uyirmei chart, words with கி, கீ, கு, கூ sounds, family, body, colours, numbers 1–20, animals, singular and plural, opposites, அம்மா இங்கே வா வா, Aathichoodi',
+        pre:  [['Letter sounds','sound',3,{set:'all'}],['Word meanings','meaning',3,{topics:['family','body','colours']}],['Find the word','find',2,{topics:['isigns','usigns']}],['Opposite words','pair',2,{g:'opposite'}]],
+        post: [['Letter sounds','sound',4,{set:'all'}],['Word meanings','meaning',4,{topics:['family','body','colours','numbers']}],['Find the word','find',4,{topics:['isigns','usigns','animals']}],
+               ['One and many','pair',3,{g:'number'}],['Opposite words','pair',2,{g:'opposite'}],['Aathichoodi','poem',2,{id:'aathichoodi'}],['Rhyme','poem',1,{id:'amma'}]],
+        dictation: { label:'Write the word', topics:['isigns','usigns'] } },
+      t2: { topics: 'Words with கெ, கே, கை, கொ, கோ sounds, birds, fruits, vegetables, days, school, nature, naming and action words, male and female words, this/these, question words, the lion and the mouse, the thirsty crow',
+        pre:  [['Word meanings','meaning',3,{topics:['birds','fruits','days']}],['Find the word','find',2,{topics:['esigns','osigns']}],['Male and female','pair',2,{g:'gender'}],
+               ['Naming or action word','nounverb',1,{}],['Question words','gmean',2,{g:'question'}]],
+        post: [['Word meanings','meaning',4,{topics:['birds','fruits','vegetables','days','school']}],['Find the word','find',4,{topics:['esigns','osigns','nature']}],
+               ['Male and female','pair',3,{g:'gender'}],['Naming or action word','nounverb',2,{}],['This and these','pair',2,{g:'thisthese'}],
+               ['Question words','gmean',2,{g:'question'}],['Story','story',2,{id:'lion'}],['Story','story',1,{id:'crow'}]],
+        dictation: { label:'Write the word', topics:['esigns','osigns','fruits'] } }
     },
     '3': {
       t1: { topics: 'Letters and the uyirmei chart, family, body, colours, numbers, animals, birds, naming and action words, singular and plural, opposites, Aathichoodi, the thirsty crow',
@@ -1180,7 +1262,7 @@ DATA.c1.stories = [
         return { prompt:'<div class="q-main small">' + esc(a.pic) + '</div>', ask:'<b>' + esc(a.en) + '</b>. Listen, then choose the first letter.', say:a.ta,
           options: opts.map(taOpt), answer:f, ta:a.ta, en:a.en + ' starts with ' + f }; },
       pair: function (p) { var gr = g(p.g), a = fresh(gr.rows, function (r) { return r[0]; });
-        var ask = { opposite:'Choose the opposite word.', many:'Choose the word for "many".', number:'Choose the plural (பன்மை).', gender:'Choose the female word (பெண்பால்).', synonym:'Choose the word with the same meaning.' }[p.g];
+        var ask = { opposite:'Choose the opposite word.', many:'Choose the word for "many".', number:'Choose the plural (பன்மை).', gender:'Choose the female word (பெண்பால்).', synonym:'Choose the word with the same meaning.', thisthese:'Choose the sentence for "many".' }[p.g];
         return { prompt:'<div class="q-main small">' + esc(a[0]) + '</div>', ask:ask, say:a[0],
           options: distinct(a, gr.rows, 4, function (r) { return r[1]; }).map(function (r) { return taOpt(r[1]); }), answer:a[1], ta:a[0] + ' → ' + a[1], en:a[a.length - 1] }; },
       gmean: function (p) { var gr = g(p.g), a = fresh(gr.rows, function (r) { return r[0]; });

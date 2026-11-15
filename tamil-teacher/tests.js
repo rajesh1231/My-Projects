@@ -18,6 +18,20 @@
                ['One and many','pair',2,{g:'many'}],['Opposite words','pair',1,{g:'opposite'}],['This and that','gmean',1,{g:'thisthat'}],['Story','story',1,{}]],
         dictation: { label:'Write the word', topics:['easy','aawords'] } }
     },
+    '2': {
+      t1: { topics: 'Uyirmei chart, words with கி, கீ, கு, கூ sounds, family, body, colours, numbers 1–20, animals, singular and plural, opposites, அம்மா இங்கே வா வா, Aathichoodi',
+        pre:  [['Letter sounds','sound',3,{set:'all'}],['Word meanings','meaning',3,{topics:['family','body','colours']}],['Find the word','find',2,{topics:['isigns','usigns']}],['Opposite words','pair',2,{g:'opposite'}]],
+        post: [['Letter sounds','sound',4,{set:'all'}],['Word meanings','meaning',4,{topics:['family','body','colours','numbers']}],['Find the word','find',4,{topics:['isigns','usigns','animals']}],
+               ['One and many','pair',3,{g:'number'}],['Opposite words','pair',2,{g:'opposite'}],['Aathichoodi','poem',2,{id:'aathichoodi'}],['Rhyme','poem',1,{id:'amma'}]],
+        dictation: { label:'Write the word', topics:['isigns','usigns'] } },
+      t2: { topics: 'Words with கெ, கே, கை, கொ, கோ sounds, birds, fruits, vegetables, days, school, nature, naming and action words, male and female words, this/these, question words, the lion and the mouse, the thirsty crow',
+        pre:  [['Word meanings','meaning',3,{topics:['birds','fruits','days']}],['Find the word','find',2,{topics:['esigns','osigns']}],['Male and female','pair',2,{g:'gender'}],
+               ['Naming or action word','nounverb',1,{}],['Question words','gmean',2,{g:'question'}]],
+        post: [['Word meanings','meaning',4,{topics:['birds','fruits','vegetables','days','school']}],['Find the word','find',4,{topics:['esigns','osigns','nature']}],
+               ['Male and female','pair',3,{g:'gender'}],['Naming or action word','nounverb',2,{}],['This and these','pair',2,{g:'thisthese'}],
+               ['Question words','gmean',2,{g:'question'}],['Story','story',2,{id:'lion'}],['Story','story',1,{id:'crow'}]],
+        dictation: { label:'Write the word', topics:['esigns','osigns','fruits'] } }
+    },
     '3': {
       t1: { topics: 'Letters and the uyirmei chart, family, body, colours, numbers, animals, birds, naming and action words, singular and plural, opposites, Aathichoodi, the thirsty crow',
         pre:  [['Letter sounds','sound',3,{set:'all'}],['Word meanings','meaning',3,{topics:['family','body','colours']}],['One and many','pair',2,{g:'number'}],['Opposite words','pair',2,{g:'opposite'}]],
@@ -77,7 +91,7 @@
         return { prompt:'<div class="q-main small">' + esc(a.pic) + '</div>', ask:'<b>' + esc(a.en) + '</b>. Listen, then choose the first letter.', say:a.ta,
           options: opts.map(taOpt), answer:f, ta:a.ta, en:a.en + ' starts with ' + f }; },
       pair: function (p) { var gr = g(p.g), a = fresh(gr.rows, function (r) { return r[0]; });
-        var ask = { opposite:'Choose the opposite word.', many:'Choose the word for "many".', number:'Choose the plural (பன்மை).', gender:'Choose the female word (பெண்பால்).', synonym:'Choose the word with the same meaning.' }[p.g];
+        var ask = { opposite:'Choose the opposite word.', many:'Choose the word for "many".', number:'Choose the plural (பன்மை).', gender:'Choose the female word (பெண்பால்).', synonym:'Choose the word with the same meaning.', thisthese:'Choose the sentence for "many".' }[p.g];
         return { prompt:'<div class="q-main small">' + esc(a[0]) + '</div>', ask:ask, say:a[0],
           options: distinct(a, gr.rows, 4, function (r) { return r[1]; }).map(function (r) { return taOpt(r[1]); }), answer:a[1], ta:a[0] + ' → ' + a[1], en:a[a.length - 1] }; },
       gmean: function (p) { var gr = g(p.g), a = fresh(gr.rows, function (r) { return r[0]; });
