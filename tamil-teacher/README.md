@@ -18,3 +18,9 @@ Every Tamil word is shown with **Tanglish** (Tamil in English letters) and the *
 - Host the folder with GitHub Pages and open `index.html`.
 
 Edit lessons in `data.js` (Tanglish is generated automatically by `translit.js`), then run `./build.sh` to rebuild `index.html` and the single-file version.
+
+## Hosting at study.techrajesh.com
+The workflow `.github/workflows/tamil-site.yml` publishes this folder with GitHub Pages whenever it changes on `master`.
+1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Same page, **Custom domain**: `study.techrajesh.com` → Save, then tick **Enforce HTTPS** once it is offered.
+3. At the domain's DNS provider add a record: type `CNAME`, name `study`, value `rajesh1231.github.io`.
