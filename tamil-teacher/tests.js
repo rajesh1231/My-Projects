@@ -49,6 +49,24 @@
     }
   };
 
+  PLANS['4'] = {
+    t1: { topics: 'Jobs, vehicles, feelings, directions, animals, birds, naming and action words, describing words (பெயரடை, வினையடை), the five kinds of gender, singular and plural, opposites, ஓடி விளையாடு பாப்பா, Thirukkural, the honest woodcutter',
+      pre:  [['Word meanings','meaning',3,{topics:['jobs','transport','feelings']}],['Opposite words','pair',2,{g:'opposite'}],['Describing words','gmean',2,{g:'adjective'}],
+             ['One and many','pair',2,{g:'number'}],['Naming or action word','nounverb',1,{}]],
+      post: [['Word meanings','meaning',4,{topics:['jobs','transport','feelings','directions']}],['Find the word','find',2,{topics:['animals','birds','transport']}],
+             ['Opposite words','pair',3,{g:'opposite'}],['One and many','pair',2,{g:'number'}],['Describing words','gmean',2,{g:'adjective'}],
+             ['How it is done','gmean',2,{g:'adverb'}],['Five kinds of gender','gkind',2,{}],['Thirukkural','poem',1,{id:'kural'}],
+             ['Bharathiyar song','poem',1,{id:'bharathi'}],['Story','story',1,{id:'woodcutter'}]],
+      dictation: { label:'Write the word', topics:['jobs','transport','feelings'] } },
+    t2: { topics: 'Festivals, Tamil months, nature, school, action words, splitting joined words, same-meaning words, tenses, question words, proverbs, Kondrai Vendhan, the ant and the dove, the rabbit and the tortoise',
+      pre:  [['Word meanings','meaning',3,{topics:['festivals','nature','months']}],['Splitting words','pair',2,{g:'split'}],['Same meaning','pair',2,{g:'synonym'}],
+             ['Tense','tense',1,{}],['Question words','gmean',2,{g:'question'}]],
+      post: [['Word meanings','meaning',4,{topics:['festivals','nature','months','school']}],['Find the word','find',3,{topics:['nature','school','verbs']}],
+             ['Splitting words','pair',3,{g:'split'}],['Same meaning','pair',3,{g:'synonym'}],['Tense','tense',2,{}],['Question words','gmean',1,{g:'question'}],
+             ['Proverbs','poem',1,{id:'proverbs'}],['Kondrai Vendhan','poem',1,{id:'kondrai'}],['Story','story',1,{id:'ant'}],['Story','story',1,{id:'race'}]],
+      dictation: { label:'Write the word', topics:['festivals','nature','school'] } }
+  };
+
   /* seeded random so a test gives the same questions each time */
   function rng(seed) { var h = 1779033703; for (var i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 3432918353), h = h << 13 | h >>> 19;
     return function () { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; }; }
@@ -91,12 +109,17 @@
         return { prompt:'<div class="q-main small">' + esc(a.pic) + '</div>', ask:'<b>' + esc(a.en) + '</b>. Listen, then choose the first letter.', say:a.ta,
           options: opts.map(taOpt), answer:f, ta:a.ta, en:a.en + ' starts with ' + f }; },
       pair: function (p) { var gr = g(p.g), a = fresh(gr.rows, function (r) { return r[0]; });
-        var ask = { opposite:'Choose the opposite word.', many:'Choose the word for "many".', number:'Choose the plural (பன்மை).', gender:'Choose the female word (பெண்பால்).', synonym:'Choose the word with the same meaning.', thisthese:'Choose the sentence for "many".' }[p.g];
+        var ask = { opposite:'Choose the opposite word.', many:'Choose the word for "many".', number:'Choose the plural (பன்மை).', gender:'Choose the female word (பெண்பால்).', synonym:'Choose the word with the same meaning.', split:'How does this word split?', thisthese:'Choose the sentence for "many".' }[p.g];
         return { prompt:'<div class="q-main small">' + esc(a[0]) + '</div>', ask:ask, say:a[0],
           options: distinct(a, gr.rows, 4, function (r) { return r[1]; }).map(function (r) { return taOpt(r[1]); }), answer:a[1], ta:a[0] + ' → ' + a[1], en:a[a.length - 1] }; },
       gmean: function (p) { var gr = g(p.g), a = fresh(gr.rows, function (r) { return r[0]; });
         return { prompt:'<div class="q-main small">' + esc(a[0]) + '</div>', ask:'What does this mean?', say:a[0],
           options: distinct(a, gr.rows, 4, function (r) { return r[1]; }).map(function (r) { return enOpt(r[1]); }), answer:a[1], ta:a[0], en:a[1] }; },
+      gkind: function () { var gr = g('pal'), a = fresh(gr.rows, function (r) { return r[0]; }),
+          names = { 'ஆண்பால்':'one man', 'பெண்பால்':'one woman', 'பலர்பால்':'many people', 'ஒன்றன்பால்':'one animal or thing', 'பலவின்பால்':'many animals or things' };
+        var opts = shuffle(Object.keys(names)).filter(function (k) { return k !== a[1]; }).slice(0, 3).concat([a[1]]);
+        return { prompt:'<div class="q-main small">' + esc(a[0]) + '</div>', ask:'Which kind of word (பால்) is this?', say:a[0],
+          options: shuffle(opts).map(function (k) { return { html:'<span class="ta">' + esc(k) + '</span><span class="en">' + names[k] + '</span>', key:k }; }), answer:a[1], ta:a[0] + ' → ' + a[1], en:a[2] + ' · ' + names[a[1]] }; },
       nounverb: function () { var n = g('noun'), v = g('verb'), isN = R() < .5, a = fresh((isN ? n : v).rows, function (r) { return r[0]; });
         var right = isN ? 'Naming word (பெயர்ச்சொல்)' : 'Action word (வினைச்சொல்)';
         return { prompt:'<div class="q-main small">' + esc(a[0]) + '</div>', ask:'Is this a naming word or an action word?', say:a[0],

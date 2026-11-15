@@ -49,7 +49,7 @@
     box.addEventListener('change', apply); apply();
   }
   bindToggle('#opt-tl', 'no-tl'); bindToggle('#opt-en', 'no-en');
-  cls = ['1', '2', '3'].indexOf(store('cls')) >= 0 ? store('cls') : '3';
+  cls = ['1', '2', '3', '4'].indexOf(store('cls')) >= 0 ? store('cls') : '3';
 
   /* ---------- card builders ---------- */
   function card(ta, tanglish, en, opts) {
@@ -109,7 +109,7 @@
   function renderClass() {
   C = D['c' + cls];
   window.TamilApp.hooks.forEach(function (f) { f(); });
-  ['1', '2', '3'].forEach(function (n) { document.body.classList.toggle('c' + n, cls === n); });
+  ['1', '2', '3', '4'].forEach(function (n) { document.body.classList.toggle('c' + n, cls === n); });
   document.querySelectorAll('.cls-switch button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cls === cls ? 'true' : 'false'); });
   chipBar($('#topic-chips'), C.topics, function (tp) {
     var p = $('#topic-panel');
@@ -299,7 +299,7 @@
   var views = ['start', 'letters', 'words', 'grammar', 'reading', 'practice', 'tests', 'homework'];
   function route() {
     var v = (location.hash || '#start').slice(1);
-    if (v === 'class1' || v === 'class2' || v === 'class3') { cls = v.slice(5); store('cls', cls); renderClass(); v = 'start'; }
+    if (/^class[1-4]$/.test(v)) { cls = v.slice(5); store('cls', cls); renderClass(); v = 'start'; }
     if (views.indexOf(v) < 0) v = 'start';
     views.forEach(function (n) { $('#view-' + n).hidden = n !== v; });
     document.querySelectorAll('.tabs a').forEach(function (a) { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
