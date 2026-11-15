@@ -1,0 +1,884 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amma's Tamil Class</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Class 3 Tamil (CBSE) lessons in Tanglish and English for parents who can't read Tamil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@500;600;700&family=Mukta+Malar:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one column of lessons under a sticky tab bar; kolam dot grid marks the header. */
+:root {
+  --bg: #f4f7f4; --surface: #ffffff; --ink: #16302b; --muted: #56706a;
+  --accent: #d6961a; --accent-soft: #fbefd6; --accent-ink: #6f4700;
+  --leaf: #2c7656; --leaf-soft: #e1f0e8; --line: #d9e3de; --bad: #b3402e; --bad-soft: #f8e3df;
+  --font-display: "Baloo Thambi 2", "Mukta Malar", system-ui, sans-serif;
+  --font-body: "Mukta Malar", "Noto Sans Tamil", system-ui, sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1917; --surface: #162421; --ink: #e5eeea; --muted: #9bb0aa;
+  --accent: #f0b440; --accent-soft: #3a2d12; --accent-ink: #f7d48c;
+  --leaf: #62bf94; --leaf-soft: #17352a; --line: #293b37; --bad: #f08a76; --bad-soft: #3d1f1a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0e1917; --surface: #162421; --ink: #e5eeea; --muted: #9bb0aa;
+  --accent: #f0b440; --accent-soft: #3a2d12; --accent-ink: #f7d48c;
+  --leaf: #62bf94; --leaf-soft: #17352a; --line: #293b37; --bad: #f08a76; --bad-soft: #3d1f1a; color-scheme: dark }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.55; margin: 0; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h2 { font-size: 1.7rem; } h3 { font-size: 1.25rem; }
+p { margin: 0; }
+a { color: var(--leaf); }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+.masthead { background: var(--surface); border-bottom: 1px solid var(--line);
+  background-image: radial-gradient(circle, var(--line) 1.6px, transparent 1.8px); background-size: 22px 22px; background-position: right -6px top -6px; }
+.masthead .wrap { padding-block: 18px 14px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; }
+.brand h1 { font-size: 1.9rem; }
+.brand h1 span { color: var(--accent); }
+.brand p { color: var(--muted); font-size: .95rem; }
+.toggles { display: flex; gap: 8px; flex-wrap: wrap; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .9rem; }
+.toggle input { accent-color: var(--leaf); width: 18px; height: 18px; }
+
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.tabs .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 6px; }
+.tabs a { flex: none; text-decoration: none; color: var(--muted); padding: 8px 14px; border-radius: 999px; font-weight: 600; font-size: .95rem; white-space: nowrap; }
+.tabs a small { display: block; font-size: .72rem; font-weight: 500; line-height: 1; }
+.tabs a[aria-current="page"] { background: var(--leaf); color: var(--surface); }
+
+main .wrap { padding-block: 24px 60px; display: grid; gap: 28px; }
+section.view { display: grid; gap: 22px; }
+.lead { color: var(--muted); max-width: 65ch; }
+.ta { font-family: var(--font-display); }
+.tl { color: var(--accent-ink); font-weight: 600; }
+.en { color: var(--muted); }
+body.no-tl .tl, body.no-en .en { visibility: hidden; }
+body.no-tl .tl.keep, body.no-en .en.keep { visibility: visible; }
+
+/* panels */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 14px; min-width: 0; }
+.panel-head { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; }
+.panel-head .ta { font-size: 1.35rem; color: var(--leaf); }
+.note { background: var(--accent-soft); color: var(--ink); border-radius: 10px; padding: 12px 14px; font-size: .95rem; }
+.note b { color: var(--accent-ink); }
+
+/* chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-weight: 600; font-size: .95rem; }
+.chip .ta { font-weight: 500; }
+.chip[aria-pressed="true"] { background: var(--leaf); border-color: var(--leaf); color: var(--surface); }
+
+/* cards */
+.grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.grid.letters { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+.card { position: relative; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 12px 10px; display: grid; gap: 2px; align-content: start; min-width: 0; }
+.card:hover { border-color: var(--leaf); }
+.card.playing { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.card .pic { font-size: 1.6rem; line-height: 1.2; }
+.card .ta { font-size: 1.45rem; line-height: 1.3; overflow-wrap: anywhere; }
+.letters .card .ta { font-size: 2.6rem; line-height: 1.1; }
+.card .tl { font-size: 1.05rem; }
+.card .en { font-size: .88rem; line-height: 1.35; }
+.card .hint { font-size: .82rem; color: var(--muted); line-height: 1.35; }
+.spk { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; background: var(--leaf-soft); color: var(--leaf); display: grid; place-items: center; }
+.spk svg { width: 16px; height: 16px; }
+
+/* uyirmei chart */
+.scroll-x { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table.chart { border-collapse: collapse; min-width: 760px; width: 100%; background: var(--surface); }
+.chart th, .chart td { border: 1px solid var(--line); text-align: center; padding: 4px 2px; }
+.chart th { background: var(--leaf-soft); font-family: var(--font-display); font-size: 1.05rem; }
+.chart th small { display: block; font-family: var(--font-body); color: var(--accent-ink); font-size: .75rem; }
+.chart td button { background: none; border: 0; width: 100%; padding: 4px 0; border-radius: 6px; }
+.chart td button:hover { background: var(--accent-soft); }
+.chart td .ta { display: block; font-size: 1.35rem; line-height: 1.2; }
+.chart td .tl { display: block; font-size: .78rem; }
+
+/* tables for grammar */
+table.list { border-collapse: collapse; width: 100%; }
+.list th { text-align: left; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding: 6px 8px; border-bottom: 2px solid var(--line); }
+.list td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.list td .ta { font-size: 1.2rem; display: block; }
+.list td .tl { display: block; font-size: .9rem; }
+.list button.row-spk { border: 0; background: var(--leaf-soft); color: var(--leaf); border-radius: 50%; width: 30px; height: 30px; display: grid; place-items: center; }
+.list button.row-spk svg { width: 16px; height: 16px; }
+
+/* reading lines */
+.lines { display: grid; gap: 4px; }
+.line { display: grid; grid-template-columns: 36px 1fr; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+.line:last-child { border-bottom: 0; }
+.line .ta { font-size: 1.3rem; white-space: pre-line; }
+.line .tl { white-space: pre-line; }
+.line > div { min-width: 0; display: grid; gap: 2px; }
+.round { border: 0; background: var(--leaf-soft); color: var(--leaf); border-radius: 50%; width: 34px; height: 34px; display: grid; place-items: center; }
+.round svg { width: 18px; height: 18px; }
+.btn { border: 1px solid var(--leaf); background: var(--leaf); color: var(--surface); padding: 9px 16px; border-radius: 10px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--leaf); }
+.btn svg { width: 18px; height: 18px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* guide */
+.steps { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: grid; gap: 6px; align-content: start; }
+.step .n { font-family: var(--font-display); color: var(--accent); font-size: 1.6rem; line-height: 1; }
+.week { width: 100%; border-collapse: collapse; }
+.week td, .week th { border-bottom: 1px solid var(--line); padding: 8px; text-align: left; vertical-align: top; }
+.week th { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+.voice-warn { background: var(--bad-soft); border-radius: 10px; padding: 12px 14px; font-size: .95rem; }
+.voice-ok { background: var(--leaf-soft); border-radius: 10px; padding: 12px 14px; font-size: .95rem; }
+
+/* quiz */
+.quiz { display: grid; gap: 16px; justify-items: center; text-align: center; padding: 26px 18px; }
+.quiz .q-main { font-family: var(--font-display); font-size: 4rem; line-height: 1.1; }
+.quiz .q-main.small { font-size: 2.4rem; }
+.quiz .q-sub { color: var(--muted); }
+.options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%; max-width: 520px; }
+.opt { border: 2px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 8px; font-size: 1.15rem; font-weight: 600; min-height: 58px; }
+.opt .ta { font-size: 1.4rem; display: block; }
+.opt .tl { display: block; font-size: .85rem; font-weight: 500; }
+.opt.right { border-color: var(--leaf); background: var(--leaf-soft); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.score { font-family: var(--font-display); font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.feedback { min-height: 1.6em; font-weight: 600; }
+
+/* tracing */
+.trace-box { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1; border: 2px dashed var(--line); border-radius: 16px; background: var(--surface); touch-action: none; margin: 0 auto; }
+.trace-box .ghost { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); font-size: min(62vw, 270px); color: var(--line); user-select: none; pointer-events: none; line-height: 1; }
+.trace-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+select, textarea { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+textarea { width: 100%; min-height: 150px; font-family: var(--font-display); font-size: 1.15rem; line-height: 1.6; }
+
+footer { color: var(--muted); font-size: .85rem; padding-block: 0 40px; }
+@media (max-width: 520px) { h2 { font-size: 1.4rem; } .brand h1 { font-size: 1.5rem; } .panel { padding: 16px; } .quiz .q-main { font-size: 3.2rem; } }
+@media (prefers-reduced-motion: no-preference) { .opt, .card, .chip { transition: background .15s, border-color .15s; } }
+</style></head><body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Amma's <span>Tamil</span> Class</h1>
+      <p>Class 3 Tamil, explained in Tanglish and English, so any parent can teach it.</p>
+    </div>
+    <div class="toggles" role="group" aria-label="Helpers">
+      <label class="toggle"><input type="checkbox" id="opt-tl" checked> Tanglish</label>
+      <label class="toggle"><input type="checkbox" id="opt-en" checked> English</label>
+    </div>
+  </div>
+</header>
+<nav class="tabs" aria-label="Lessons">
+  <div class="wrap">
+    <a href="#start">Start here<small>How to teach</small></a>
+    <a href="#letters">Letters<small class="ta">எழுத்துகள்</small></a>
+    <a href="#words">Words<small class="ta">சொற்கள்</small></a>
+    <a href="#grammar">Grammar<small class="ta">இலக்கணம்</small></a>
+    <a href="#reading">Poems &amp; stories<small class="ta">பாடல் / கதை</small></a>
+    <a href="#practice">Practice<small>Quiz &amp; writing</small></a>
+    <a href="#homework">Homework helper<small>Any textbook page</small></a>
+  </div>
+</nav>
+<main>
+  <div class="wrap">
+
+    <section class="view" id="view-start">
+      <div class="panel">
+        <h2>You don't need to read Tamil to teach it</h2>
+        <p class="lead">Every Tamil word on this site has the <b class="tl keep">Tanglish</b> (Tamil written in English letters) right under it, and the <b class="en keep">English meaning</b> below that. Tap any card to hear it spoken. Read the Tanglish, listen, and say it together with your child.</p>
+        <div id="voice-status"></div>
+      </div>
+
+      <div class="steps">
+        <div class="step"><span class="n">1</span><h3>Learn the sound with them</h3><p>Open a lesson, tap the speaker, and repeat it together. You only need the Tanglish line. Your child reads the Tamil line.</p></div>
+        <div class="step"><span class="n">2</span><h3>Hide the helpers to test</h3><p>Untick <b>Tanglish</b> and <b>English</b> at the top. Now your child must read the Tamil alone. You can still tick them back to check.</p></div>
+        <div class="step"><span class="n">3</span><h3>Use it for school homework</h3><p>For any page of the school book, open <a href="#homework">Homework helper</a>. Copy the Tamil text with Google Lens and paste it in to get Tanglish and the meaning.</p></div>
+        <div class="step"><span class="n">4</span><h3>Practise for 15 minutes a day</h3><p>Short and daily works better than long and weekly. Use the <a href="#practice">Practice</a> quiz and letter tracing at the end of each session.</p></div>
+      </div>
+
+      <div class="panel">
+        <h3>How to read the Tanglish</h3>
+        <p>A double letter means a longer sound: <b class="tl keep">a</b> is short (like "cup"), <b class="tl keep">aa</b> is long (like "father"). <b class="tl keep">ee</b> is "see", <b class="tl keep">oo</b> is "moon". A line on top (<b class="tl keep">ē</b>, <b class="tl keep">ō</b>) also means long: <b class="tl keep">ē</b> like "cake", <b class="tl keep">ō</b> like "boat". <b class="tl keep">zh</b> is the special Tamil sound in "Tamizh": curl the tongue back and say a soft "r".</p>
+        <p>Tamil has three "n" letters, two "l" letters and two "r" letters. In the letter charts the hard ones are written with a capital letter: <b class="tl keep">N</b> (ண), <b class="tl keep">L</b> (ள), <b class="tl keep">R</b> (ற). Inside words they are written in small letters, the way people type Tamil on WhatsApp.</p>
+      </div>
+
+      <div class="panel">
+        <h3>A simple weekly plan</h3>
+        <div class="scroll-x" style="border:0">
+        <table class="week">
+          <thead><tr><th>Day</th><th>What to do (15–20 min)</th></tr></thead>
+          <tbody>
+            <tr><td>Monday</td><td>Today's school lesson in <a href="#homework">Homework helper</a>: read it aloud together, then talk about the meaning.</td></tr>
+            <tr><td>Tuesday</td><td>Letters: 2 rows of the <a href="#letters">uyirmei chart</a>. Then trace 3 hard letters in <a href="#practice">Practice</a>.</td></tr>
+            <tr><td>Wednesday</td><td>One <a href="#words">word topic</a>. Point to real things at home and say the Tamil word.</td></tr>
+            <tr><td>Thursday</td><td>One <a href="#grammar">grammar</a> topic. Ask 5 questions from the table, then swap: the child asks you.</td></tr>
+            <tr><td>Friday</td><td>A <a href="#reading">story or poem</a>. Child reads one line, you read the next. Ask the questions at the end.</td></tr>
+            <tr><td>Weekend</td><td><a href="#practice">Quiz</a> games. Revise the school lesson of the week and any spelling the teacher gave.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="note"><b>About the syllabus:</b> this site covers the topics usually taught in Class 3 Tamil (second language) in CBSE schools, including Sri Chaitanya: letters and the uyirmei chart, everyday words, singular and plural, opposites, male and female words, tenses, Aathichoodi, Thirukkural, rhymes and short stories. Your child's school book may have its own lessons and poems. For those, use the <a href="#homework">Homework helper</a>, which works with any Tamil text.</div>
+    </section>
+
+    <section class="view" id="view-letters" hidden>
+      <div><h2>Letters <span class="ta">எழுத்துகள்</span></h2>
+        <p class="lead">Tamil has 12 vowels (உயிர் எழுத்துகள்), 18 consonants (மெய் எழுத்துகள்) and one special letter ஃ. A consonant joined with a vowel makes an uyirmei letter (உயிர்மெய்): க் + அ = க.</p></div>
+      <div class="panel"><div class="panel-head"><h3>Vowels</h3><span class="ta">உயிர் எழுத்துகள்</span><span class="en">uyir ezhutthugal · 12 letters</span></div>
+        <div class="grid letters" id="uyir-grid"></div></div>
+      <div class="panel"><div class="panel-head"><h3>Consonants</h3><span class="ta">மெய் எழுத்துகள்</span><span class="en">mei ezhutthugal · 18 letters</span></div>
+        <p class="en keep">The dot on top (புள்ளி, pulli) means the letter has no vowel sound. Say it very short.</p>
+        <div class="grid letters" id="mei-grid"></div>
+        <div class="note"><b>ஃ (aaytham, ahk)</b> is a rare special letter that sounds like a soft "h", as in அஃது (ahdhu).</div></div>
+      <div class="panel"><div class="panel-head"><h3>Uyirmei chart</h3><span class="ta">உயிர்மெய் எழுத்துகள்</span><span class="en">18 × 12 = 216 letters</span></div>
+        <p class="en keep">Each row is one consonant joined with all 12 vowels. Tap a letter to hear it. Learn one row a day: ka, kaa, ki, kee, ku, koo…</p>
+        <div class="scroll-x"><table class="chart" id="uyirmei"></table></div></div>
+    </section>
+
+    <section class="view" id="view-words" hidden>
+      <div><h2>Words <span class="ta">சொற்கள்</span></h2>
+        <p class="lead">Pick a topic. Tap a card to hear the word. Point to the real thing at home while you say it.</p></div>
+      <div class="chips" id="topic-chips"></div>
+      <div class="panel" id="topic-panel"></div>
+      <div class="panel"><div class="panel-head"><h3>Talk with your child in Tamil</h3><span class="ta">பேசுவோம்</span></div>
+        <div class="lines" id="phrases"></div></div>
+    </section>
+
+    <section class="view" id="view-grammar" hidden>
+      <div><h2>Grammar <span class="ta">இலக்கணம்</span></h2>
+        <p class="lead">These are the grammar topics that come in Class 3 exams. Each one has a plain-English explanation for you and examples for your child.</p></div>
+      <div class="chips" id="grammar-chips"></div>
+      <div class="panel" id="grammar-panel"></div>
+    </section>
+
+    <section class="view" id="view-reading" hidden>
+      <div><h2>Poems and stories <span class="ta">பாடல்களும் கதைகளும்</span></h2>
+        <p class="lead">Read one line at a time. Tap the speaker to hear it, or use "Read all" to listen to the whole piece.</p></div>
+      <div class="chips" id="reading-chips"></div>
+      <div class="panel" id="reading-panel"></div>
+    </section>
+
+    <section class="view" id="view-practice" hidden>
+      <div><h2>Practice <span class="ta">பயிற்சி</span></h2>
+        <p class="lead">Quick games to check what your child remembers, and a tracing board to practise writing letters.</p></div>
+      <div class="chips" id="quiz-chips"></div>
+      <div class="panel quiz" id="quiz"></div>
+      <div class="panel">
+        <div class="panel-head"><h3>Letter tracing</h3><span class="ta">எழுதிப் பழகு</span></div>
+        <div class="row"><label for="trace-pick">Letter</label><select id="trace-pick"></select>
+          <button class="btn ghost" id="trace-say" type="button">Hear it</button>
+          <button class="btn ghost" id="trace-clear" type="button">Clear</button>
+          <button class="btn" id="trace-next" type="button">Next letter</button></div>
+        <div class="trace-box"><div class="ghost" id="trace-ghost">அ</div><canvas id="trace-canvas"></canvas></div>
+        <p class="en keep">Let your child trace over the grey letter with a finger. Tamil letters usually start at the top left and go round.</p>
+      </div>
+    </section>
+
+    <section class="view" id="view-homework" hidden>
+      <div><h2>Homework helper</h2>
+        <p class="lead">Paste any Tamil text from the school book. You get each line in Tanglish, a button to hear it, and a link to its English meaning.</p></div>
+      <div class="note"><b>How to copy Tamil text from the book:</b> open the Google app or Google Lens on your phone → point the camera at the page → tap <b>Text</b> → <b>Select all</b> → <b>Copy</b>. Then come back here and paste it in the box below.</div>
+      <div class="panel">
+        <label for="hw-input"><b>Tamil text</b></label>
+        <textarea id="hw-input" spellcheck="false"></textarea>
+        <div class="row">
+          <button class="btn" id="hw-go" type="button">Convert to Tanglish</button>
+          <button class="btn ghost" id="hw-clear" type="button">Clear</button>
+          <button class="btn ghost" id="hw-copy" type="button">Copy Tanglish</button>
+          <span class="en keep" id="hw-msg"></span>
+        </div>
+      </div>
+      <div class="panel" id="hw-out"></div>
+    </section>
+
+  </div>
+</main>
+<footer><div class="wrap">Tap-to-listen uses your phone or computer's built-in Tamil voice. Meanings for your own text come from Google Translate, so check them with the teacher when unsure.</div></footer>
+<script>
+/* Tamil script -> easy Tanglish (English letters) converter.
+   Follows how Tamil is actually spoken: க is "k" at the start of a word,
+   "g" in the middle ("magan"), "kk" when doubled ("akka"), and so on. */
+(function (root) {
+  var VOWELS = { 'அ':'a','ஆ':'aa','இ':'i','ஈ':'ee','உ':'u','ஊ':'oo','எ':'e','ஏ':'ē','ஐ':'ai','ஒ':'o','ஓ':'ō','ஔ':'au' };
+  var SIGNS  = { 'ா':'aa','ி':'i','ீ':'ee','ு':'u','ூ':'oo','ெ':'e','ே':'ē','ை':'ai','ொ':'o','ோ':'ō','ௌ':'au' };
+  var PULLI = '்';
+  var BASE = { 'க':'k','ங':'ng','ச':'s','ஞ':'nj','ட':'t','ண':'n','த':'th','ந':'n','ப':'p','ம':'m','ய':'y','ர':'r','ல':'l','வ':'v','ழ':'zh','ள':'l','ற':'r','ன':'n','ஜ':'j','ஷ':'sh','ஸ':'s','ஹ':'h','ஶ':'sh' };
+  var NASAL = { 'ங':1,'ஞ':1,'ண':1,'ந':1,'ம':1,'ன':1 };
+  var STOP  = { 'க':1,'ச':1,'ட':1,'த':1,'ப':1,'ற':1 };
+  // sound of a stop consonant in each position
+  var STOPS = {
+    'க': { init:'k', dbl:'k',  nasal:'g',  hard:'k',  soft:'g',  vowel:'g'  },
+    'ச': { init:'s', dbl:'ch', nasal:'j',  hard:'ch', soft:'s',  vowel:'s'  },
+    'ட': { init:'t', dbl:'t',  nasal:'d',  hard:'t',  soft:'d',  vowel:'d'  },
+    'த': { init:'th',dbl:'th', nasal:'dh', hard:'th', soft:'dh', vowel:'dh' },
+    'ப': { init:'p', dbl:'p',  nasal:'b',  hard:'p',  soft:'p',  vowel:'b'  },
+    'ற': { init:'r', dbl:'r',  nasal:'dr', hard:'r',  soft:'r',  vowel:'r'  }
+  };
+  // first half of a doubled stop: க்க=kk, ச்ச=cch, ட்ட=tt, த்த=tth, ப்ப=pp, ற்ற=tr
+  var DBL_FIRST = { 'க':'k','ச':'c','ட':'t','த':'t','ப':'p','ற':'t' };
+  var PULLI_STOP = { 'க':'k','ச':'ch','ட':'t','த':'th','ப':'p','ற':'r' };
+  var DIGITS = { '௦':'0','௧':'1','௨':'2','௩':'3','௪':'4','௫':'5','௬':'6','௭':'7','௮':'8','௯':'9','௰':'10' };
+
+  function tokenize(text) {
+    var toks = [], chars = Array.from(text.normalize('NFC'));
+    for (var i = 0; i < chars.length; i++) {
+      var c = chars[i];
+      if (BASE[c]) {
+        var n = chars[i + 1];
+        if (n === PULLI) { toks.push({ type:'C', c:c, v:null }); i++; }
+        else if (SIGNS[n]) { toks.push({ type:'C', c:c, v:SIGNS[n] }); i++; }
+        else toks.push({ type:'C', c:c, v:'a' });
+      } else if (VOWELS[c]) toks.push({ type:'V', v:VOWELS[c] });
+      else if (c === 'ஃ') toks.push({ type:'A' });
+      else if (SIGNS[c] || c === PULLI || c === 'ௗ') { /* stray sign: skip */ }
+      else toks.push({ type:'O', c: DIGITS[c] || c });
+    }
+    return toks;
+  }
+
+  function convert(text) {
+    if (!text) return '';
+    var t = tokenize(text), out = '';
+    for (var i = 0; i < t.length; i++) {
+      var k = t[i], prev = t[i - 1], next = t[i + 1];
+      if (k.type === 'O') { out += k.c; continue; }
+      if (k.type === 'V') { out += k.v; continue; }
+      if (k.type === 'A') { out += 'h'; continue; }
+      var c = k.c, s;
+      if (k.v === null && next && next.type === 'C' && next.c === c && DBL_FIRST[c]) {
+        s = DBL_FIRST[c];                       // first half of a doubled stop
+      } else if (k.v === null && next && next.type === 'C' && STOP[next.c] && (c === 'ங' || c === 'ஞ')) {
+        s = 'n';                                // ங்க = ng, ஞ்ச = nj
+      } else if (STOPS[c] && k.v === null) {
+        s = PULLI_STOP[c];                      // a stop with pulli keeps its hard sound
+      } else if (STOPS[c]) {
+        var pos;
+        if (!prev || prev.type === 'O') pos = 'init';
+        else if (prev.type === 'A') pos = 'hard';
+        else if (prev.type === 'V' || prev.v !== null) pos = 'vowel';
+        else if (prev.c === c) pos = 'dbl';
+        else if (NASAL[prev.c]) pos = 'nasal';
+        else if (STOP[prev.c] || prev.c === 'ஷ' || prev.c === 'ஸ') pos = 'hard';
+        else pos = 'soft';
+        s = STOPS[c][pos];
+      } else if (c === 'ய' && k.v === null && prev && /a$/.test(prev.v || '')) {
+        s = 'i';                                // நாய் = naai, வாய் = vaai
+      } else s = BASE[c];
+      out += s + (k.v || '');
+    }
+    return out;
+  }
+
+  root.TamilTranslit = { convert: convert };
+  if (typeof module !== 'undefined') module.exports = root.TamilTranslit;
+})(typeof window !== 'undefined' ? window : globalThis);
+/* Lesson content for Class 3 Tamil (second language).
+   Tanglish is generated automatically from the Tamil by translit.js,
+   so every line here only needs the Tamil text and the English meaning. */
+var DATA = {};
+
+DATA.uyir = [
+  ['அ','a','short "a", like the u in "cup"','அம்மா','mother'],
+  ['ஆ','aa','long "aa", like the a in "father"','ஆடு','goat'],
+  ['இ','i','short "i", like the i in "sit"','இலை','leaf'],
+  ['ஈ','ee','long "ee", like the ee in "see"','ஈ','housefly'],
+  ['உ','u','short "u", like the u in "put"','உப்பு','salt'],
+  ['ஊ','oo','long "oo", like the oo in "moon"','ஊஞ்சல்','swing'],
+  ['எ','e','short "e", like the e in "egg"','எலி','rat'],
+  ['ஏ','ē','long "ae", like the a in "cake"','ஏணி','ladder'],
+  ['ஐ','ai','"ai", like the word "eye"','ஐந்து','five'],
+  ['ஒ','o','short "o", like the o in "omit"','ஒட்டகம்','camel'],
+  ['ஓ','ō','long "o", like the oa in "boat"','ஓநாய்','wolf'],
+  ['ஔ','au','"au", like the ow in "cow"','ஔவையார்','the poet Avvaiyar']
+];
+
+DATA.mei = [
+  ['க்','k','"k" as in kite. In the middle of a word it softens to "g"','கல்','stone'],
+  ['ங்','ng','"ng" as in sing','சிங்கம்','lion'],
+  ['ச்','ch','"s" at the start of a word, "ch" when doubled, "j" after ஞ்','சட்டை','shirt'],
+  ['ஞ்','nj','"ny" as in canyon','ஞாயிறு','Sunday / sun'],
+  ['ட்','t','hard "t" with the tongue curled back, as in top. "d" in the middle of a word','படம்','picture'],
+  ['ண்','N','"n" with the tongue curled back (hard n)','கண்','eye'],
+  ['த்','th','soft "t" with the tongue touching the teeth. "dh" in the middle of a word','தண்ணீர்','water'],
+  ['ந்','n','"n" as in nose (used at the start of words)','நாய்','dog'],
+  ['ப்','p','"p" as in pen. "b" in the middle of a word','பந்து','ball'],
+  ['ம்','m','"m" as in mango','மரம்','tree'],
+  ['ய்','y','"y" as in yes','யானை','elephant'],
+  ['ர்','r','light "r" as in run','ரோஜா','rose'],
+  ['ல்','l','"l" as in lamp (tongue behind the teeth)','இலை','leaf'],
+  ['வ்','v','"v" as in van','வீடு','house'],
+  ['ழ்','zh','special Tamil sound: curl the tongue back and say "r" softly, as in Tamizh','பழம்','fruit'],
+  ['ள்','L','"l" with the tongue curled back (hard l)','வாள்','sword'],
+  ['ற்','R','strong rolled "r". Doubled ற்ற sounds "tr"','கறி','curry'],
+  ['ன்','n','"n" as in sun (used in the middle and end of words)','மான்','deer']
+];
+
+DATA.uyirmeiCons = ['க','ங','ச','ஞ','ட','ண','த','ந','ப','ம','ய','ர','ல','வ','ழ','ள','ற','ன'];
+DATA.uyirmeiBase = ['k','ng','ch','nj','t','N','th','n','p','m','y','r','l','v','zh','L','R','n'];
+DATA.uyirmeiSigns = ['','ா','ி','ீ','ு','ூ','ெ','ே','ை','ொ','ோ','ௌ'];
+DATA.uyirmeiVowel = ['a','aa','i','ee','u','oo','e','ē','ai','o','ō','au'];
+
+/* Word topics: [Tamil, English, picture] */
+DATA.topics = [
+  { id:'family', ta:'குடும்பம்', en:'Family', words:[
+    ['அம்மா','mother','👩'],['அப்பா','father','👨'],['அண்ணன்','elder brother','👦'],['அக்கா','elder sister','👧'],
+    ['தம்பி','younger brother','👦'],['தங்கை','younger sister','👧'],['தாத்தா','grandfather','👴'],['பாட்டி','grandmother','👵'],
+    ['மாமா','uncle (mother\'s brother)','🧔'],['அத்தை','aunt (father\'s sister)','👩'],['குழந்தை','baby / child','👶'],['குடும்பம்','family','👨‍👩‍👧‍👦']]},
+  { id:'body', ta:'உடல் உறுப்புகள்', en:'Parts of the body', words:[
+    ['தலை','head','🙂'],['முடி','hair','💇'],['கண்','eye','👁️'],['காது','ear','👂'],['மூக்கு','nose','👃'],['வாய்','mouth','👄'],
+    ['பல்','tooth','🦷'],['நாக்கு','tongue','👅'],['கை','hand','✋'],['விரல்','finger','☝️'],['கால்','leg','🦵'],['வயிறு','stomach','🫃']]},
+  { id:'colours', ta:'நிறங்கள்', en:'Colours', words:[
+    ['சிவப்பு','red','🔴'],['பச்சை','green','🟢'],['மஞ்சள்','yellow','🟡'],['நீலம்','blue','🔵'],['வெள்ளை','white','⚪'],
+    ['கருப்பு','black','⚫'],['ஆரஞ்சு','orange','🟠'],['ஊதா','purple','🟣'],['இளஞ்சிவப்பு','pink','🌸'],['பழுப்பு','brown','🟤']]},
+  { id:'numbers', ta:'எண்கள்', en:'Numbers', words:[
+    ['ஒன்று','one (1)','1'],['இரண்டு','two (2)','2'],['மூன்று','three (3)','3'],['நான்கு','four (4)','4'],['ஐந்து','five (5)','5'],
+    ['ஆறு','six (6)','6'],['ஏழு','seven (7)','7'],['எட்டு','eight (8)','8'],['ஒன்பது','nine (9)','9'],['பத்து','ten (10)','10'],
+    ['பதினொன்று','eleven (11)','11'],['பன்னிரண்டு','twelve (12)','12'],['பதின்மூன்று','thirteen (13)','13'],['பதினான்கு','fourteen (14)','14'],
+    ['பதினைந்து','fifteen (15)','15'],['பதினாறு','sixteen (16)','16'],['பதினேழு','seventeen (17)','17'],['பதினெட்டு','eighteen (18)','18'],
+    ['பத்தொன்பது','nineteen (19)','19'],['இருபது','twenty (20)','20'],['ஐம்பது','fifty (50)','50'],['நூறு','hundred (100)','100']]},
+  { id:'animals', ta:'விலங்குகள்', en:'Animals', words:[
+    ['நாய்','dog','🐕'],['பூனை','cat','🐈'],['பசு','cow','🐄'],['யானை','elephant','🐘'],['சிங்கம்','lion','🦁'],['புலி','tiger','🐅'],
+    ['குரங்கு','monkey','🐒'],['குதிரை','horse','🐎'],['ஆடு','goat','🐐'],['முயல்','rabbit','🐇'],['மான்','deer','🦌'],['கரடி','bear','🐻'],
+    ['எலி','rat','🐀'],['ஒட்டகம்','camel','🐫'],['ஆமை','tortoise','🐢'],['பாம்பு','snake','🐍']]},
+  { id:'birds', ta:'பறவைகள்', en:'Birds', words:[
+    ['காகம்','crow','🐦‍⬛'],['கிளி','parrot','🦜'],['மயில்','peacock','🦚'],['புறா','pigeon','🕊️'],['கோழி','hen','🐔'],
+    ['வாத்து','duck','🦆'],['குருவி','sparrow','🐦'],['ஆந்தை','owl','🦉'],['கழுகு','eagle','🦅'],['பறவை','bird','🐤']]},
+  { id:'fruits', ta:'பழங்கள்', en:'Fruits', words:[
+    ['மாம்பழம்','mango','🥭'],['வாழைப்பழம்','banana','🍌'],['ஆப்பிள்','apple','🍎'],['ஆரஞ்சு','orange','🍊'],['திராட்சை','grapes','🍇'],
+    ['பலாப்பழம்','jackfruit','🍈'],['கொய்யாப்பழம்','guava','🍐'],['மாதுளை','pomegranate','🍎'],['தர்பூசணி','watermelon','🍉'],
+    ['அன்னாசி','pineapple','🍍'],['தேங்காய்','coconut','🥥'],['பழம்','fruit','🍓']]},
+  { id:'vegetables', ta:'காய்கறிகள்', en:'Vegetables', words:[
+    ['கத்தரிக்காய்','brinjal','🍆'],['வெண்டைக்காய்','lady\'s finger','🫛'],['தக்காளி','tomato','🍅'],['உருளைக்கிழங்கு','potato','🥔'],
+    ['வெங்காயம்','onion','🧅'],['கேரட்','carrot','🥕'],['முருங்கைக்காய்','drumstick','🥢'],['பூசணிக்காய்','pumpkin','🎃'],
+    ['கீரை','spinach / greens','🥬'],['மிளகாய்','chilli','🌶️'],['வெள்ளரிக்காய்','cucumber','🥒'],['பூண்டு','garlic','🧄']]},
+  { id:'days', ta:'கிழமைகள்', en:'Days of the week', words:[
+    ['ஞாயிற்றுக்கிழமை','Sunday','☀️'],['திங்கட்கிழமை','Monday','🌙'],['செவ்வாய்க்கிழமை','Tuesday','🔴'],['புதன்கிழமை','Wednesday','🟢'],
+    ['வியாழக்கிழமை','Thursday','🟡'],['வெள்ளிக்கிழமை','Friday','⚪'],['சனிக்கிழமை','Saturday','⚫'],
+    ['நேற்று','yesterday','⬅️'],['இன்று','today','📍'],['நாளை','tomorrow','➡️']]},
+  { id:'months', ta:'தமிழ் மாதங்கள்', en:'Tamil months', words:[
+    ['சித்திரை','Chithirai (Apr–May)','1'],['வைகாசி','Vaikasi (May–Jun)','2'],['ஆனி','Aani (Jun–Jul)','3'],['ஆடி','Aadi (Jul–Aug)','4'],
+    ['ஆவணி','Aavani (Aug–Sep)','5'],['புரட்டாசி','Purattasi (Sep–Oct)','6'],['ஐப்பசி','Aippasi (Oct–Nov)','7'],['கார்த்திகை','Karthigai (Nov–Dec)','8'],
+    ['மார்கழி','Margazhi (Dec–Jan)','9'],['தை','Thai (Jan–Feb)','10'],['மாசி','Maasi (Feb–Mar)','11'],['பங்குனி','Panguni (Mar–Apr)','12']]},
+  { id:'school', ta:'பள்ளியும் வீடும்', en:'School and home', words:[
+    ['பள்ளி','school','🏫'],['ஆசிரியர்','teacher','🧑‍🏫'],['மாணவன்','student (boy)','👦'],['மாணவி','student (girl)','👧'],
+    ['புத்தகம்','book','📖'],['எழுதுகோல்','pen','🖊️'],['பை','bag','🎒'],['கரும்பலகை','blackboard','🖤'],
+    ['வீடு','house','🏠'],['கதவு','door','🚪'],['ஜன்னல்','window','🪟'],['நாற்காலி','chair','🪑'],['மேசை','table','🛋️'],['தண்ணீர்','water','💧']]},
+  { id:'nature', ta:'இயற்கை', en:'Nature', words:[
+    ['சூரியன்','sun','☀️'],['நிலா','moon','🌙'],['நட்சத்திரம்','star','⭐'],['வானம்','sky','🌌'],['மழை','rain','🌧️'],
+    ['மேகம்','cloud','☁️'],['காற்று','wind / air','🌬️'],['மரம்','tree','🌳'],['பூ','flower','🌼'],['இலை','leaf','🍃'],
+    ['ஆறு','river','🏞️'],['கடல்','sea','🌊'],['மலை','mountain','⛰️'],['காடு','forest','🌲']]},
+  { id:'verbs', ta:'செயல் சொற்கள்', en:'Action words', words:[
+    ['வா','come','👋'],['போ','go','🚶'],['உட்கார்','sit','🪑'],['எழுந்திரு','get up / stand up','🧍'],['சாப்பிடு','eat','🍽️'],
+    ['குடி','drink','🥛'],['படி','read / study','📖'],['எழுது','write','✍️'],['ஓடு','run','🏃'],['தூங்கு','sleep','😴'],
+    ['விளையாடு','play','⚽'],['பார்','see / look','👀'],['பேசு','speak','🗣️'],['கேள்','listen / ask','👂'],['பாடு','sing','🎵'],['ஆடு','dance','💃']]}
+];
+
+/* Useful sentences for talking with the child: [Tamil, English] */
+DATA.phrases = [
+  ['வணக்கம்','Hello / Namaste'],
+  ['நன்றி','Thank you'],
+  ['உன் பெயர் என்ன?','What is your name?'],
+  ['என் பெயர் மீனா.','My name is Meena.'],
+  ['எப்படி இருக்கிறாய்?','How are you?'],
+  ['நான் நன்றாக இருக்கிறேன்.','I am fine.'],
+  ['இது என்ன?','What is this?'],
+  ['அது என்ன?','What is that?'],
+  ['புத்தகத்தை எடு.','Take out the book.'],
+  ['சத்தமாகப் படி.','Read aloud.'],
+  ['மீண்டும் சொல்.','Say it again.'],
+  ['நன்றாக எழுது.','Write neatly.'],
+  ['வீட்டுப்பாடம் செய்தாயா?','Did you do your homework?'],
+  ['சாப்பிட்டாயா?','Did you eat?'],
+  ['மிகவும் நன்று!','Very good!'],
+  ['இன்று பள்ளியில் என்ன படித்தாய்?','What did you study in school today?']
+];
+
+/* Grammar topics usually taught in Class 3 */
+DATA.grammar = [
+  { id:'noun', ta:'பெயர்ச்சொல்', en:'Naming words (Nouns)',
+    explain:'A பெயர்ச்சொல் is the name of a person, place, animal or thing. Ask the child: "Is it a name of something?"',
+    cols:['Word','Meaning'],
+    rows:[['ராமு','Ramu (a name)'],['சென்னை','Chennai (a place)'],['யானை','elephant'],['மேசை','table'],['பூ','flower'],['பள்ளி','school']] },
+  { id:'verb', ta:'வினைச்சொல்', en:'Action words (Verbs)',
+    explain:'A வினைச்சொல் tells what someone does. Act it out with the child and ask them to say the word.',
+    cols:['Word','Meaning'],
+    rows:[['ஓடு','run'],['படி','read'],['எழுது','write'],['சாப்பிடு','eat'],['பாடு','sing'],['தூங்கு','sleep']] },
+  { id:'number', ta:'ஒருமை – பன்மை', en:'One and many (Singular / Plural)',
+    explain:'To say "many", add கள் (gal / kal) at the end. If the word ends in ம், change ம் to ங்கள். If it ends in a long sound like பூ or பசு, add க்கள்.',
+    cols:['One (ஒருமை)','Many (பன்மை)','Meaning'],
+    rows:[['மரம்','மரங்கள்','tree → trees'],['பழம்','பழங்கள்','fruit → fruits'],['புத்தகம்','புத்தகங்கள்','book → books'],
+          ['நாய்','நாய்கள்','dog → dogs'],['கை','கைகள்','hand → hands'],['பறவை','பறவைகள்','bird → birds'],
+          ['பூ','பூக்கள்','flower → flowers'],['பசு','பசுக்கள்','cow → cows']] },
+  { id:'opposite', ta:'எதிர்ச்சொல்', en:'Opposite words',
+    explain:'Say one word, the child says the opposite. This is a common question in Class 3 exams.',
+    cols:['Word','Opposite','Meaning'],
+    rows:[['பெரிய','சிறிய','big – small'],['நல்ல','கெட்ட','good – bad'],['பகல்','இரவு','day – night'],['மேலே','கீழே','up – down'],
+          ['உள்ளே','வெளியே','inside – outside'],['முன்','பின்','front – back'],['புதிய','பழைய','new – old'],['வெற்றி','தோல்வி','win – loss'],
+          ['இன்பம்','துன்பம்','happiness – sorrow'],['வெளிச்சம்','இருட்டு','light – darkness'],['சூடு','குளிர்','hot – cold'],['வா','போ','come – go']] },
+  { id:'gender', ta:'ஆண்பால் – பெண்பால்', en:'Male and female words',
+    explain:'Many male words end in ன் and female words end in ள் or இ. அவன் = he, அவள் = she, அவர் = he/she (respectful).',
+    cols:['Male (ஆண்பால்)','Female (பெண்பால்)','Meaning'],
+    rows:[['அவன்','அவள்','he – she'],['மாணவன்','மாணவி','boy student – girl student'],['சிறுவன்','சிறுமி','boy – girl'],
+          ['அண்ணன்','அக்கா','elder brother – elder sister'],['தம்பி','தங்கை','younger brother – younger sister'],
+          ['அப்பா','அம்மா','father – mother'],['தாத்தா','பாட்டி','grandfather – grandmother'],['அரசன்','அரசி','king – queen']] },
+  { id:'pronoun', ta:'சுட்டுப் பெயர்கள்', en:'Pronouns (I, you, he, she…)',
+    explain:'These words replace names. நீ is for friends and younger people; நீங்கள் is for elders and for many people.',
+    cols:['Word','Meaning'],
+    rows:[['நான்','I'],['நாங்கள்','we'],['நீ','you'],['நீங்கள்','you (respect / many)'],['அவன்','he'],['அவள்','she'],
+          ['அவர்','he / she (respect)'],['அது','it / that'],['இது','this'],['அவர்கள்','they']] },
+  { id:'question', ta:'வினாச் சொற்கள்', en:'Question words',
+    explain:'Use these to ask questions about a lesson. Most end with an "e" or "ee" sound.',
+    cols:['Word','Meaning'],
+    rows:[['என்ன?','what?'],['எங்கே?','where?'],['எப்போது?','when?'],['ஏன்?','why?'],['யார்?','who?'],['எப்படி?','how?'],['எத்தனை?','how many?'],['எது?','which?']] },
+  { id:'tense', ta:'காலம்', en:'Tense (past, present, future)',
+    explain:'இறந்தகாலம் = past (already happened), நிகழ்காலம் = present (happening now), எதிர்காலம் = future (will happen).',
+    cols:['Past','Present','Future'],
+    rows:[['நான் படித்தேன்','நான் படிக்கிறேன்','நான் படிப்பேன்'],['அவன் ஓடினான்','அவன் ஓடுகிறான்','அவன் ஓடுவான்'],
+          ['அவள் பாடினாள்','அவள் பாடுகிறாள்','அவள் பாடுவாள்'],['நாங்கள் விளையாடினோம்','நாங்கள் விளையாடுகிறோம்','நாங்கள் விளையாடுவோம்']],
+    note:'Meanings: I read / am reading / will read · He ran / is running / will run · She sang / is singing / will sing · We played / are playing / will play' },
+  { id:'synonym', ta:'ஒருபொருள் தரும் பல சொற்கள்', en:'Words with the same meaning',
+    explain:'Tamil has many words for the same thing. Textbooks often ask for one more word with the same meaning.',
+    cols:['Word','Same meaning','Meaning'],
+    rows:[['சூரியன்','கதிரவன்','sun'],['நிலா','சந்திரன்','moon'],['வீடு','இல்லம்','house'],['தண்ணீர்','நீர்','water'],
+          ['பூ','மலர்','flower'],['கண்','விழி','eye'],['அம்மா','தாய்','mother'],['அப்பா','தந்தை','father']] }
+];
+
+/* Poems and verses: lines of [Tamil, English] */
+DATA.poems = [
+  { id:'aathichoodi', ta:'ஆத்திசூடி', en:'Aathichoodi by Avvaiyar',
+    about:'Short one-line advice, one for each Tamil vowel, written by the poet Avvaiyar. Children learn these by heart in the early classes.',
+    lines:[['அறம் செய விரும்பு','Love doing good deeds.'],['ஆறுவது சினம்','Anger should cool down.'],
+      ['இயல்வது கரவேல்','Do not hide what you are able to give.'],['ஈவது விலக்கேல்','Do not stop others from giving.'],
+      ['உடையது விளம்பேல்','Do not show off what you own.'],['ஊக்கமது கைவிடேல்','Never give up your enthusiasm.'],
+      ['எண் எழுத்து இகழேல்','Never look down on numbers and letters (learning).'],['ஏற்பது இகழ்ச்சி','Begging is shameful.'],
+      ['ஐயம் இட்டு உண்','Share food with the needy before you eat.'],['ஒப்புரவு ஒழுகு','Live in harmony with everyone.'],
+      ['ஓதுவது ஒழியேல்','Never stop learning.'],['ஔவியம் பேசேல்','Do not speak with jealousy.'],
+      ['அஃகம் சுருக்கேல்','Do not cheat when measuring grain.']] },
+  { id:'kural', ta:'திருக்குறள்', en:'Thirukkural by Thiruvalluvar',
+    about:'Each kural has two lines. These are the most famous ones that children learn first.',
+    lines:[['அகர முதல எழுத்தெல்லாம் ஆதி\nபகவன் முதற்றே உலகு.','Just as "அ" is the first of all letters, God is the first of the world. (Kural 1)'],
+      ['கற்க கசடறக் கற்பவை கற்றபின்\nநிற்க அதற்குத் தக.','Learn well and without mistakes, then live by what you have learnt. (Kural 391)'],
+      ['எண்ணென்ப ஏனை எழுத்தென்ப இவ்விரண்டும்\nகண்ணென்ப வாழும் உயிர்க்கு.','Numbers and letters are like two eyes for every living person. (Kural 392)'],
+      ['இனிய உளவாக இன்னாத கூறல்\nகனியிருப்பக் காய்கவர்ந் தற்று.','Speaking harsh words when sweet words are there is like eating raw fruit when ripe fruit is there. (Kural 100)']] },
+  { id:'nila', ta:'நிலா நிலா ஓடி வா', en:'Moon, moon, come running (rhyme)',
+    about:'A favourite Tamil nursery rhyme. Sing it together with actions.',
+    lines:[['நிலா நிலா ஓடி வா','Moon, moon, come running.'],['நில்லாமல் ஓடி வா','Come running without stopping.'],
+      ['மலை மேலே ஏறி வா','Climb up over the mountain and come.'],['மல்லிகைப் பூ கொண்டு வா','Bring jasmine flowers with you.']] }
+];
+
+/* Short reading stories: lines of [Tamil, English] */
+DATA.stories = [
+  { id:'crow', ta:'காகமும் பானையும்', en:'The thirsty crow',
+    lines:[['ஒரு காகத்திற்கு மிகவும் தாகமாக இருந்தது.','A crow was very thirsty.'],
+      ['அது தண்ணீர் தேடிப் பறந்தது.','It flew around looking for water.'],
+      ['ஒரு பானையில் கொஞ்சம் தண்ணீர் இருந்தது.','There was a little water in a pot.'],
+      ['காகத்தின் அலகு தண்ணீரை எட்டவில்லை.','The crow\'s beak could not reach the water.'],
+      ['காகம் சிறிய கற்களைப் பானையில் போட்டது.','The crow dropped small stones into the pot.'],
+      ['தண்ணீர் மேலே வந்தது.','The water came up.'],
+      ['காகம் தண்ணீரைக் குடித்து மகிழ்ந்தது.','The crow drank the water happily.']],
+    moral:['முயற்சி திருவினையாக்கும்.','Effort brings success.'],
+    questions:[['காகத்திற்கு என்ன ஆனது?','What happened to the crow?','அதற்குத் தாகமாக இருந்தது.','It was thirsty.'],
+      ['பானையில் என்ன இருந்தது?','What was in the pot?','கொஞ்சம் தண்ணீர் இருந்தது.','A little water.'],
+      ['காகம் பானையில் என்ன போட்டது?','What did the crow put in the pot?','சிறிய கற்களைப் போட்டது.','Small stones.']] },
+  { id:'race', ta:'முயலும் ஆமையும்', en:'The rabbit and the tortoise',
+    lines:[['ஒரு காட்டில் ஒரு முயலும் ஒரு ஆமையும் இருந்தன.','A rabbit and a tortoise lived in a forest.'],
+      ['முயல் வேகமாக ஓடும்.','The rabbit runs fast.'],
+      ['ஆமை மெதுவாக நடக்கும்.','The tortoise walks slowly.'],
+      ['ஒரு நாள் இரண்டும் ஓட்டப்பந்தயம் வைத்தன.','One day the two of them had a race.'],
+      ['முயல் வேகமாக ஓடி, ஒரு மரத்தடியில் தூங்கியது.','The rabbit ran fast and then slept under a tree.'],
+      ['ஆமை நிற்காமல் நடந்து கொண்டே இருந்தது.','The tortoise kept walking without stopping.'],
+      ['கடைசியில் ஆமை வெற்றி பெற்றது.','In the end, the tortoise won.']],
+    moral:['விடாமுயற்சி வெற்றி தரும்.','Never giving up brings success.'],
+    questions:[['காட்டில் யார் இருந்தார்கள்?','Who lived in the forest?','முயலும் ஆமையும் இருந்தன.','A rabbit and a tortoise.'],
+      ['முயல் எங்கே தூங்கியது?','Where did the rabbit sleep?','மரத்தடியில் தூங்கியது.','Under a tree.'],
+      ['யார் வெற்றி பெற்றது?','Who won?','ஆமை வெற்றி பெற்றது.','The tortoise.']] }
+];
+
+if (typeof module !== 'undefined') module.exports = DATA;
+(function () {
+  var D = window.DATA, tl = window.TamilTranslit.convert;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function gtLink(text) { return 'https://translate.google.com/?sl=ta&tl=en&op=translate&text=' + encodeURIComponent(text); }
+
+  /* ---------- speech ---------- */
+  var voice = null, synth = window.speechSynthesis;
+  function findVoice() {
+    if (!synth) return null;
+    var vs = synth.getVoices();
+    voice = vs.filter(function (v) { return /^ta/i.test(v.lang); })[0] || null;
+    renderVoiceStatus();
+    return voice;
+  }
+  if (synth) { findVoice(); synth.onvoiceschanged = findVoice; }
+  function speak(text, el) {
+    text = text.replace(/\n/g, ' ');
+    if (!synth) { window.open(gtLink(text), '_blank', 'noopener'); return; }
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ta-IN'; if (voice) u.voice = voice; u.rate = 0.8;
+    if (el) { el.classList.add('playing'); u.onend = u.onerror = function () { el.classList.remove('playing'); }; }
+    synth.speak(u);
+  }
+  function speakAll(list) {
+    if (!synth) return; synth.cancel();
+    list.forEach(function (t) { var u = new SpeechSynthesisUtterance(t.replace(/\n/g, ' ')); u.lang = 'ta-IN'; if (voice) u.voice = voice; u.rate = 0.8; synth.speak(u); });
+  }
+  function renderVoiceStatus() {
+    var box = $('#voice-status'); if (!box) return;
+    if (voice) box.innerHTML = '<div class="voice-ok"><b>Sound is ready.</b> A Tamil voice was found on this device. Tap any card to hear it.</div>';
+    else box.innerHTML = '<div class="voice-warn"><b>No Tamil voice found on this device yet.</b> Tapping a word may sound wrong or silent. To fix it on Android: Settings → search "Text-to-speech" → Preferred engine: <b>Speech Services by Google</b> → tap the settings icon → Install voice data → <b>Tamil (India)</b>. On iPhone: Settings → Accessibility → Spoken Content → Voices → add <b>Tamil</b>. Then reload this page. Use Chrome on Android or Safari on iPhone for best results.</div>';
+  }
+
+  /* ---------- helpers toggles ---------- */
+  function bindToggle(id, cls) {
+    var box = $(id), saved = store(cls);
+    if (saved === '0') box.checked = false;
+    var apply = function () { document.body.classList.toggle(cls, !box.checked); store(cls, box.checked ? '1' : '0'); };
+    box.addEventListener('change', apply); apply();
+  }
+  bindToggle('#opt-tl', 'no-tl'); bindToggle('#opt-en', 'no-en');
+
+  /* ---------- card builders ---------- */
+  function card(ta, tanglish, en, opts) {
+    opts = opts || {};
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'card';
+    b.innerHTML = (opts.pic ? '<span class="pic" aria-hidden="true">' + esc(opts.pic) + '</span>' : '') +
+      '<span class="ta">' + esc(ta) + '</span><span class="tl">' + esc(tanglish) + '</span>' +
+      (en ? '<span class="en">' + esc(en) + '</span>' : '') + (opts.hint ? '<span class="hint">' + esc(opts.hint) + '</span>' : '') +
+      '<span class="spk">' + SPK + '</span>';
+    b.setAttribute('aria-label', 'Hear ' + tanglish + (en ? ', ' + en : ''));
+    b.addEventListener('click', function () { speak(opts.say || ta, b); });
+    return b;
+  }
+  function lineRow(ta, en) {
+    var d = document.createElement('div'); d.className = 'line';
+    d.innerHTML = '<button type="button" class="round" aria-label="Hear this line">' + SPK + '</button><div><span class="ta">' + esc(ta) +
+      '</span><span class="tl">' + esc(tl(ta)) + '</span>' + (en ? '<span class="en">' + esc(en) + '</span>' : '') + '</div>';
+    d.querySelector('button').addEventListener('click', function () { speak(ta, d); });
+    return d;
+  }
+  function chipBar(el, items, onPick, key) {
+    el.innerHTML = '';
+    var saved = store(key), first = items.filter(function (x) { return x.id === saved; })[0] || items[0];
+    items.forEach(function (it) {
+      var c = document.createElement('button'); c.type = 'button'; c.className = 'chip';
+      c.innerHTML = esc(it.en) + (it.ta ? ' <span class="ta">' + esc(it.ta) + '</span>' : '');
+      c.addEventListener('click', function () { select(it); });
+      it._chip = c; el.appendChild(c);
+    });
+    function select(it) { items.forEach(function (x) { x._chip.setAttribute('aria-pressed', x === it ? 'true' : 'false'); }); store(key, it.id); onPick(it); }
+    select(first);
+  }
+
+  /* ---------- letters ---------- */
+  var uy = $('#uyir-grid');
+  D.uyir.forEach(function (r) { uy.appendChild(card(r[0], r[1], r[3] + ' = ' + r[4], { hint: r[2], say: r[0] })); });
+  var me = $('#mei-grid');
+  D.mei.forEach(function (r) { me.appendChild(card(r[0], r[1], r[3] + ' = ' + r[4], { hint: r[2], say: r[0].replace('்', '') })); });
+  (function () {
+    var t = $('#uyirmei'), h = '<thead><tr><th></th>';
+    D.uyir.forEach(function (u) { h += '<th>' + u[0] + '<small>' + u[1] + '</small></th>'; });
+    h += '</tr></thead><tbody>';
+    D.uyirmeiCons.forEach(function (c, i) {
+      h += '<tr><th>' + D.mei[i][0] + '<small>' + D.uyirmeiBase[i] + '</small></th>';
+      D.uyirmeiSigns.forEach(function (s, j) {
+        var L = c + s, T = D.uyirmeiBase[i] + D.uyirmeiVowel[j];
+        h += '<td><button type="button" data-say="' + L + '" aria-label="' + T + '"><span class="ta">' + L + '</span><span class="tl">' + T + '</span></button></td>';
+      });
+      h += '</tr>';
+    });
+    t.innerHTML = h + '</tbody>';
+    t.addEventListener('click', function (e) { var b = e.target.closest('button[data-say]'); if (b) speak(b.dataset.say, b); });
+  })();
+
+  /* ---------- words ---------- */
+  chipBar($('#topic-chips'), D.topics, function (tp) {
+    var p = $('#topic-panel');
+    p.innerHTML = '<div class="panel-head"><h3>' + esc(tp.en) + '</h3><span class="ta">' + esc(tp.ta) + '</span><span class="tl">' + esc(tl(tp.ta)) + '</span></div>';
+    var g = document.createElement('div'); g.className = 'grid';
+    tp.words.forEach(function (w) { g.appendChild(card(w[0], tl(w[0]), w[1], { pic: w[2] })); });
+    p.appendChild(g);
+  }, 'topic');
+  var ph = $('#phrases');
+  D.phrases.forEach(function (p) { ph.appendChild(lineRow(p[0], p[1])); });
+
+  /* ---------- grammar ---------- */
+  chipBar($('#grammar-chips'), D.grammar, function (g) {
+    var p = $('#grammar-panel'), taCols = g.cols.length - (g.id === 'tense' ? 0 : 1);
+    var h = '<div class="panel-head"><h3>' + esc(g.en) + '</h3><span class="ta">' + esc(g.ta) + '</span><span class="tl">' + esc(tl(g.ta)) + '</span></div>' +
+      '<div class="note">' + esc(g.explain) + '</div><div class="scroll-x" style="border:0"><table class="list"><thead><tr>';
+    g.cols.forEach(function (c) { h += '<th>' + esc(c) + '</th>'; });
+    h += '<th><span class="sr" hidden>Listen</span></th></tr></thead><tbody>';
+    g.rows.forEach(function (r, i) {
+      h += '<tr>';
+      r.forEach(function (cell, j) {
+        if (j < taCols) h += '<td><span class="ta">' + esc(cell) + '</span><span class="tl">' + esc(tl(cell)) + '</span></td>';
+        else h += '<td class="en">' + esc(cell) + '</td>';
+      });
+      h += '<td><button type="button" class="row-spk" data-row="' + i + '" aria-label="Hear this row">' + SPK + '</button></td></tr>';
+    });
+    h += '</tbody></table></div>' + (g.note ? '<p class="en">' + esc(g.note) + '</p>' : '');
+    p.innerHTML = h;
+    p.querySelectorAll('.row-spk').forEach(function (b) {
+      b.addEventListener('click', function () { speak(g.rows[+b.dataset.row].slice(0, taCols).join('. '), b.closest('tr')); });
+    });
+  }, 'grammar');
+
+  /* ---------- reading ---------- */
+  var reads = D.poems.concat(D.stories);
+  chipBar($('#reading-chips'), reads, function (r) {
+    var p = $('#reading-panel');
+    p.innerHTML = '<div class="panel-head"><h3>' + esc(r.en) + '</h3><span class="ta">' + esc(r.ta) + '</span><span class="tl">' + esc(tl(r.ta)) + '</span></div>' +
+      (r.about ? '<p class="en keep">' + esc(r.about) + '</p>' : '');
+    var row = document.createElement('div'); row.className = 'row';
+    row.innerHTML = '<button type="button" class="btn">' + SPK + ' Read all</button><button type="button" class="btn ghost">Stop</button>';
+    row.children[0].onclick = function () { speakAll(r.lines.map(function (l) { return l[0]; })); };
+    row.children[1].onclick = function () { synth && synth.cancel(); };
+    p.appendChild(row);
+    var ls = document.createElement('div'); ls.className = 'lines';
+    r.lines.forEach(function (l) { ls.appendChild(lineRow(l[0], l[1])); });
+    p.appendChild(ls);
+    if (r.moral) {
+      var m = document.createElement('div'); m.className = 'note';
+      m.innerHTML = '<b>Moral (நீதி, needhi):</b>'; m.appendChild(lineRow(r.moral[0], r.moral[1])); p.appendChild(m);
+    }
+    if (r.questions) {
+      var qh = document.createElement('h3'); qh.textContent = 'Questions to ask (வினாக்கள்)'; p.appendChild(qh);
+      var qs = document.createElement('div'); qs.className = 'lines';
+      r.questions.forEach(function (q) {
+        qs.appendChild(lineRow(q[0], q[1]));
+        var a = lineRow(q[2], 'Answer: ' + q[3]); a.style.paddingLeft = '24px'; qs.appendChild(a);
+      });
+      p.appendChild(qs);
+    }
+  }, 'reading');
+
+  /* ---------- quiz ---------- */
+  var allWords = []; D.topics.forEach(function (t) { t.words.forEach(function (w) { allWords.push({ ta: w[0], en: w[1], pic: w[2], topic: t.id }); }); });
+  var allLetters = D.uyir.map(function (u) { return { ta: u[0], tl: u[1] }; }).concat(D.mei.map(function (m) { return { ta: m[0], tl: m[1] }; }));
+  D.uyirmeiCons.forEach(function (c, i) { D.uyirmeiSigns.forEach(function (s, j) { allLetters.push({ ta: c + s, tl: D.uyirmeiBase[i] + D.uyirmeiVowel[j] }); }); });
+  var quizzes = [
+    { id:'letter', en:'Read the letter', make: function () {
+      var a = pick(allLetters), opts = [a];
+      while (opts.length < 4) { var o = pick(allLetters); if (opts.every(function (x) { return x.tl.toLowerCase() !== o.tl.toLowerCase(); })) opts.push(o); }
+      return { main: a.ta, sub: 'Which sound is this letter?', say: a.ta.replace('்', ''), answer: a, opts: shuffle(opts), label: function (o) { return '<span>' + esc(o.tl) + '</span>'; } };
+    }},
+    { id:'meaning', en:'What does it mean?', make: function () {
+      var a = pick(allWords), opts = [a];
+      while (opts.length < 4) { var o = pick(allWords); if (opts.every(function (x) { return x.en !== o.en; })) opts.push(o); }
+      return { main: a.ta, small: true, sub: '<span class="tl">' + esc(tl(a.ta)) + '</span> · Choose the meaning', say: a.ta, answer: a, opts: shuffle(opts), label: function (o) { return esc(o.en); } };
+    }},
+    { id:'find', en:'Find the Tamil word', make: function () {
+      var a = pick(allWords.filter(function (w) { return w.topic !== 'months'; })), pool = allWords.filter(function (w) { return w.topic === a.topic; }), opts = [a];
+      while (opts.length < 4) { var o = pick(pool.length >= 4 ? pool : allWords); if (opts.every(function (x) { return x.ta !== o.ta; })) opts.push(o); }
+      return { main: a.pic, small: true, sub: '<b>' + esc(a.en) + '</b> · Which Tamil word is it?', say: null, answer: a, opts: shuffle(opts), reveal: true,
+        label: function (o) { return '<span class="ta">' + esc(o.ta) + '</span><span class="tl q-tl" hidden>' + esc(tl(o.ta)) + '</span>'; } };
+    }}
+  ];
+  var score = { right: 0, total: 0 }, current;
+  function renderQuiz(qz) {
+    current = qz;
+    var q = qz.make(), box = $('#quiz');
+    box.innerHTML = '<div class="score">Score: ' + score.right + ' / ' + score.total + '</div>' +
+      '<div class="q-main' + (q.small ? ' small' : '') + '">' + esc(q.main) + '</div><div class="q-sub">' + q.sub + '</div>' +
+      (q.say ? '<button type="button" class="btn ghost" id="q-say">' + SPK + ' Hear it</button>' : '') +
+      '<div class="options"></div><div class="feedback" aria-live="polite"></div><button type="button" class="btn" id="q-next">Next question</button>';
+    var ops = box.querySelector('.options'), done = false;
+    q.opts.forEach(function (o) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.innerHTML = q.label(o);
+      b.addEventListener('click', function () {
+        if (done) return; done = true; score.total++;
+        var ok = o === q.answer; if (ok) score.right++;
+        b.classList.add(ok ? 'right' : 'wrong');
+        ops.children[q.opts.indexOf(q.answer)].classList.add('right');
+        if (q.reveal) box.querySelectorAll('.q-tl').forEach(function (x) { x.hidden = false; });
+        box.querySelector('.feedback').innerHTML = ok ? 'சபாஷ்! (sabaash!) Well done.' : 'Not quite. The answer is shown in green.';
+        box.querySelector('.score').textContent = 'Score: ' + score.right + ' / ' + score.total;
+        speak(q.answer.ta.replace('்', ''));
+      });
+      ops.appendChild(b);
+    });
+    if (q.say) $('#q-say').onclick = function () { speak(q.say); };
+    $('#q-next').onclick = function () { renderQuiz(current); };
+  }
+  chipBar($('#quiz-chips'), quizzes, function (qz) { renderQuiz(qz); }, 'quiz');
+
+  /* ---------- tracing ---------- */
+  (function () {
+    var sel = $('#trace-pick'), ghost = $('#trace-ghost'), cv = $('#trace-canvas'), ctx = cv.getContext('2d'), drawing = false;
+    var letters = D.uyir.map(function (u) { return [u[0], u[1]]; }).concat(D.mei.map(function (m) { return [m[0], m[1]]; }));
+    D.uyirmeiCons.forEach(function (c, i) { letters.push([c, D.uyirmeiBase[i] + 'a']); });
+    letters.forEach(function (l, i) { var o = document.createElement('option'); o.value = i; o.textContent = l[0] + '  (' + l[1] + ')'; sel.appendChild(o); });
+    function size() { var r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1; cv.width = r.width * d; cv.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+    function clear() { size(); }
+    function show() { ghost.textContent = letters[sel.value][0]; clear(); }
+    function pt(e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+    cv.addEventListener('pointerdown', function (e) { drawing = true; cv.setPointerCapture(e.pointerId); var p = pt(e); ctx.beginPath(); ctx.moveTo(p[0], p[1]);
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--leaf'); ctx.lineWidth = 12; ctx.lineCap = ctx.lineJoin = 'round'; });
+    cv.addEventListener('pointermove', function (e) { if (!drawing) return; var p = pt(e); ctx.lineTo(p[0], p[1]); ctx.stroke(); });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) { cv.addEventListener(ev, function () { drawing = false; }); });
+    sel.addEventListener('change', show);
+    $('#trace-clear').onclick = clear;
+    $('#trace-say').onclick = function () { speak(letters[sel.value][0].replace('்', '')); };
+    $('#trace-next').onclick = function () { sel.value = (+sel.value + 1) % letters.length; show(); };
+    window.addEventListener('resize', clear);
+    show();
+    window._traceResize = clear;
+  })();
+
+  /* ---------- homework helper ---------- */
+  var sample = 'எங்கள் வீட்டுத் தோட்டம்\nஎங்கள் வீட்டில் ஒரு அழகான தோட்டம் உள்ளது.\nஅதில் ரோஜா, மல்லிகை, செம்பருத்தி பூக்கள் உள்ளன.\nநான் தினமும் செடிகளுக்குத் தண்ணீர் ஊற்றுவேன்.';
+  var inp = $('#hw-input'), out = $('#hw-out');
+  inp.value = store('hw') || sample;
+  function convertHW() {
+    var text = inp.value.trim(); store('hw', inp.value);
+    out.innerHTML = '';
+    if (!text) { out.innerHTML = '<p class="en keep">Paste Tamil text in the box above, then tap Convert to Tanglish.</p>'; return; }
+    var head = document.createElement('div'); head.className = 'row';
+    head.innerHTML = '<h3>Tanglish</h3><button type="button" class="btn ghost">' + SPK + ' Read all</button><a class="btn ghost" target="_blank" rel="noopener" href="' + gtLink(text) + '">English meaning of all ↗</a>';
+    head.querySelector('button').onclick = function () { speakAll(text.split(/\n+/)); };
+    out.appendChild(head);
+    var ls = document.createElement('div'); ls.className = 'lines';
+    text.split(/\n+/).forEach(function (line) {
+      line = line.trim(); if (!line) return;
+      var r = lineRow(line, '');
+      if (/[஀-௿]/.test(line)) {
+        var a = document.createElement('a'); a.href = gtLink(line); a.target = '_blank'; a.rel = 'noopener'; a.className = 'en keep'; a.textContent = 'Meaning ↗';
+        r.children[1].appendChild(a);
+      }
+      ls.appendChild(r);
+    });
+    out.appendChild(ls);
+  }
+  $('#hw-go').onclick = convertHW;
+  $('#hw-clear').onclick = function () { inp.value = ''; store('hw', ''); convertHW(); inp.focus(); };
+  $('#hw-copy').onclick = function () {
+    var txt = inp.value.split('\n').map(function (l) { return tl(l); }).join('\n'), msg = $('#hw-msg');
+    var p = navigator.clipboard && navigator.clipboard.writeText(txt);
+    if (p) p.then(function () { msg.textContent = 'Copied.'; }, function () { msg.textContent = 'Copy blocked. Select the Tanglish below and copy it.'; });
+    else msg.textContent = 'Select the Tanglish below and copy it.';
+  };
+  convertHW();
+
+  /* ---------- routing ---------- */
+  var views = ['start', 'letters', 'words', 'grammar', 'reading', 'practice', 'homework'];
+  function route() {
+    var v = (location.hash || '#start').slice(1); if (views.indexOf(v) < 0) v = 'start';
+    views.forEach(function (n) { $('#view-' + n).hidden = n !== v; });
+    document.querySelectorAll('.tabs a').forEach(function (a) { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    if (v === 'practice') window._traceResize();
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route); route();
+})();
+</script></body></html>
