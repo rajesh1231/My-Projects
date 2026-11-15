@@ -13,6 +13,7 @@ Use the **Class 1 / Class 3** switch at the top. Direct links: `#class1`, `#clas
 - **Grammar** – nouns, verbs, singular/plural, opposites, male/female, pronouns, question words, tenses, synonyms
 - **Poems & stories** – Aathichoodi, Thirukkural, Nila Nila rhyme, two short stories with questions
 - **Practice** – three quiz games and a letter-tracing board
+- **Tests** – pre-test (10 questions) and post-test (20 questions + 5 dictation) for Term 1 and Term 2 of each class, with score by topic, wrong answers to review and a pre→post comparison. Defined in `tests.js`.
 - **Homework helper** – paste any Tamil text (e.g. copied from the textbook with Google Lens) and get Tanglish line by line, audio and a meaning link
 
 ## Use it

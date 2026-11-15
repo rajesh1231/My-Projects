@@ -155,3 +155,31 @@ textarea { width: 100%; min-height: 150px; font-family: var(--font-display); fon
 footer { color: var(--muted); font-size: .85rem; padding-block: 0 40px; }
 @media (max-width: 520px) { h2 { font-size: 1.4rem; } .brand h1 { font-size: 1.5rem; } .panel { padding: 16px; } .quiz .q-main { font-size: 3.2rem; } }
 @media (prefers-reduced-motion: no-preference) { .opt, .card, .chip { transition: background .15s, border-color .15s; } }
+
+/* tests */
+.test-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.test-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; align-content: space-between; min-width: 0; }
+.test-card h4 { font-family: var(--font-display); font-size: 1.2rem; margin: 0; }
+.test-card .last { font-size: .9rem; font-variant-numeric: tabular-nums; }
+.compare { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; background: var(--leaf-soft); border-radius: 10px; padding: 10px 14px; font-variant-numeric: tabular-nums; }
+.compare .arrow { color: var(--muted); }
+.compare .up { color: var(--leaf); font-weight: 700; } .compare .down { color: var(--bad); font-weight: 700; }
+.test-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--accent); }
+.eyebrow { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.options.one-col { grid-template-columns: 1fr; }
+.opt.chosen { border-color: var(--accent); background: var(--accent-soft); }
+.opt:disabled { cursor: default; }
+.result-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.big-score { font-family: var(--font-display); font-size: 3.4rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.big-score span { font-size: 1.6rem; color: var(--muted); }
+.grade { font-weight: 600; color: var(--leaf); }
+.ring { --p: 0; width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center;
+  background: conic-gradient(var(--leaf) calc(var(--p) * 1%), var(--line) 0); }
+.ring span { width: 74px; height: 74px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.list td.num { white-space: nowrap; font-variant-numeric: tabular-nums; width: 70px; }
+.list td.meter { width: 40%; }
+.meter span { display: block; height: 10px; border-radius: 99px; min-width: 4px; }
+.meter .good { background: var(--leaf); } .meter .ok { background: var(--accent); } .meter .low { background: var(--bad); }
+.line .x { color: var(--bad); font-weight: 700; font-size: 1.2rem; text-align: center; }

@@ -38,6 +38,9 @@
     else box.innerHTML = '<div class="voice-warn"><b>No Tamil voice found on this device yet.</b> Tapping a word may sound wrong or silent. To fix it on Android: Settings → search "Text-to-speech" → Preferred engine: <b>Speech Services by Google</b> → tap the settings icon → Install voice data → <b>Tamil (India)</b>. On iPhone: Settings → Accessibility → Spoken Content → Voices → add <b>Tamil</b>. Then reload this page. Use Chrome on Android or Safari on iPhone for best results.</div>';
   }
 
+  window.TamilApp = { speak: speak, esc: esc, store: store, SPK: SPK, shuffle: shuffle, hooks: [],
+    cls: function () { return cls; }, data: function () { return C; } };
+
   /* ---------- helpers toggles ---------- */
   function bindToggle(id, cls) {
     var box = $(id), saved = store(cls);
@@ -105,6 +108,7 @@
   /* ---------- words ---------- */
   function renderClass() {
   C = D['c' + cls];
+  window.TamilApp.hooks.forEach(function (f) { f(); });
   document.body.classList.toggle('c1', cls === '1'); document.body.classList.toggle('c3', cls === '3');
   document.querySelectorAll('.cls-switch button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cls === cls ? 'true' : 'false'); });
   chipBar($('#topic-chips'), C.topics, function (tp) {
@@ -292,7 +296,7 @@
   convertHW();
 
   /* ---------- routing ---------- */
-  var views = ['start', 'letters', 'words', 'grammar', 'reading', 'practice', 'homework'];
+  var views = ['start', 'letters', 'words', 'grammar', 'reading', 'practice', 'tests', 'homework'];
   function route() {
     var v = (location.hash || '#start').slice(1);
     if (v === 'class1' || v === 'class3') { cls = v.slice(5); store('cls', cls); renderClass(); v = 'start'; }
