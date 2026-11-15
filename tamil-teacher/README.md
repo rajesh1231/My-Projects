@@ -22,8 +22,9 @@ Use the **Class 1 / 2 / 3 / 4** switch at the top. Direct links: `#class1`, `#cl
 
 Edit lessons in `data.js` (Tanglish is generated automatically by `translit.js`), then run `./build.sh` to rebuild `index.html` and the single-file version.
 
-## Hosting at study.techrajesh.com
-The workflow `.github/workflows/tamil-site.yml` publishes this folder with GitHub Pages whenever it changes on `master`.
-1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Same page, **Custom domain**: `study.techrajesh.com` → Save, then tick **Enforce HTTPS** once it is offered.
-3. At the domain's DNS provider add a record: type `CNAME`, name `study`, value `rajesh1231.github.io`.
+## Hosting
+The site is live at https://rajesh1231.github.io/My-Projects/. The workflow `.github/workflows/tamil-site.yml` copies this folder to the `gh-pages` branch whenever it changes on `master`, and GitHub Pages serves that branch.
+
+To use **study.techrajesh.com** instead:
+1. At the domain's DNS provider (HostingRaja) add a record: type `CNAME`, name `study`, value `rajesh1231.github.io`.
+2. Once it resolves, add a file `tamil-teacher/CNAME` containing `study.techrajesh.com` and merge it. Then tick **Enforce HTTPS** in the repo's Settings → Pages.
