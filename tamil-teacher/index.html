@@ -10,12 +10,13 @@
   <div class="wrap">
     <div class="brand">
       <h1>Amma's <span>Tamil</span> Class</h1>
-      <p>Class 3 Tamil, explained in Tanglish and English, so any parent can teach it.</p>
+      <p>Class 1 and Class 3 Tamil, explained in Tanglish and English, so any parent can teach it.</p>
     </div>
-    <div class="toggles" role="group" aria-label="Helpers">
+    <div class="toggles"><div class="cls-switch" role="group" aria-label="Class"><button type="button" data-cls="1">Class 1</button><button type="button" data-cls="3">Class 3</button></div>
+      <div class="toggles" role="group" aria-label="Helpers">
       <label class="toggle"><input type="checkbox" id="opt-tl" checked> Tanglish</label>
       <label class="toggle"><input type="checkbox" id="opt-en" checked> English</label>
-    </div>
+    </div></div>
   </div>
 </header>
 <nav class="tabs" aria-label="Lessons">
@@ -52,8 +53,8 @@
         <p>Tamil has three "n" letters, two "l" letters and two "r" letters. In the letter charts the hard ones are written with a capital letter: <b class="tl keep">N</b> (ண), <b class="tl keep">L</b> (ள), <b class="tl keep">R</b> (ற). Inside words they are written in small letters, the way people type Tamil on WhatsApp.</p>
       </div>
 
-      <div class="panel">
-        <h3>A simple weekly plan</h3>
+      <div class="panel" data-only="3">
+        <h3>A simple weekly plan for Class 3</h3>
         <div class="scroll-x" style="border:0">
         <table class="week">
           <thead><tr><th>Day</th><th>What to do (15–20 min)</th></tr></thead>
@@ -69,11 +70,32 @@
         </div>
       </div>
 
-      <div class="note"><b>About the syllabus:</b> this site covers the topics usually taught in Class 3 Tamil (second language) in CBSE schools, including Sri Chaitanya: letters and the uyirmei chart, everyday words, singular and plural, opposites, male and female words, tenses, Aathichoodi, Thirukkural, rhymes and short stories. Your child's school book may have its own lessons and poems. For those, use the <a href="#homework">Homework helper</a>, which works with any Tamil text.</div>
+      <div class="panel" data-only="1">
+        <h3>A simple weekly plan for Class 1</h3>
+        <div class="scroll-x" style="border:0">
+        <table class="week">
+          <thead><tr><th>Day</th><th>What to do (10–15 min)</th></tr></thead>
+          <tbody>
+            <tr><td>Monday</td><td>Sing <a href="#reading">அம்மா இங்கே வா வா</a> together. Then tap through the 12 <a href="#letters">vowels</a>.</td></tr>
+            <tr><td>Tuesday</td><td>Trace 3 letters in <a href="#practice">Practice</a>. Say each sound aloud while tracing.</td></tr>
+            <tr><td>Wednesday</td><td>One <a href="#words">word topic</a>. Show the real thing at home (a ball, a plate, a cup of milk) and say the Tamil word.</td></tr>
+            <tr><td>Thursday</td><td>"First letter" game in <a href="#practice">Practice</a>, and the <a href="#grammar">first letter</a> table.</td></tr>
+            <tr><td>Friday</td><td>A short <a href="#reading">story</a>. You read the Tanglish, the child points to each Tamil word.</td></tr>
+            <tr><td>Weekend</td><td>Whatever the class teacher sent home. Use the <a href="#homework">Homework helper</a> for the book page.</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="en keep">Class 1 children learn by playing. Keep it short, praise every try, and stop before they get bored.</p>
+      </div>
+
+      <div class="note" data-only="1"><b>About the syllabus:</b> this covers what is usually taught in Class 1 Tamil in CBSE schools, including Sri Chaitanya: the 12 vowels and 18 consonants, the க, கா rows of the letter chart, simple words with pictures, the first letter of a word, this and that, rhymes and very short stories. Your child's school book may have its own lessons. For those, use the <a href="#homework">Homework helper</a>.</div>
+
+      <div class="note" data-only="3"><b>About the syllabus:</b> this site covers the topics usually taught in Class 3 Tamil (second language) in CBSE schools, including Sri Chaitanya: letters and the uyirmei chart, everyday words, singular and plural, opposites, male and female words, tenses, Aathichoodi, Thirukkural, rhymes and short stories. Your child's school book may have its own lessons and poems. For those, use the <a href="#homework">Homework helper</a>, which works with any Tamil text.</div>
     </section>
 
     <section class="view" id="view-letters" hidden>
       <div><h2>Letters <span class="ta">எழுத்துகள்</span></h2>
+        <div class="note" data-only="1"><b>For Class 1:</b> learn the 12 vowels first, then the 18 consonants. In the big chart, only the first two columns (க, கா…) are needed this year.</div>
         <p class="lead">Tamil has 12 vowels (உயிர் எழுத்துகள்), 18 consonants (மெய் எழுத்துகள்) and one special letter ஃ. A consonant joined with a vowel makes an uyirmei letter (உயிர்மெய்): க் + அ = க.</p></div>
       <div class="panel"><div class="panel-head"><h3>Vowels</h3><span class="ta">உயிர் எழுத்துகள்</span><span class="en">uyir ezhutthugal · 12 letters</span></div>
         <div class="grid letters" id="uyir-grid"></div></div>
@@ -97,7 +119,7 @@
 
     <section class="view" id="view-grammar" hidden>
       <div><h2>Grammar <span class="ta">இலக்கணம்</span></h2>
-        <p class="lead">These are the grammar topics that come in Class 3 exams. Each one has a plain-English explanation for you and examples for your child.</p></div>
+        <p class="lead">These are the grammar topics for the chosen class. Each one has a plain-English explanation for you and examples for your child.</p></div>
       <div class="chips" id="grammar-chips"></div>
       <div class="panel" id="grammar-panel"></div>
     </section>
@@ -145,4 +167,4 @@
   </div>
 </main>
 <footer><div class="wrap">Tap-to-listen uses your phone or computer's built-in Tamil voice. Meanings for your own text come from Google Translate, so check them with the teacher when unsure.</div></footer>
-<script src="translit.js"></script><script src="data.js"></script><script src="app.js"></script></body></html>
+<script src="translit.js"></script><script src="data.js"></script><script src="data-class1.js"></script><script src="app.js"></script></body></html>

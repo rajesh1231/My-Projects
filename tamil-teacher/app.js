@@ -1,5 +1,6 @@
 (function () {
   var D = window.DATA, tl = window.TamilTranslit.convert;
+  var cls = '3', C = D.c3;
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
@@ -45,6 +46,7 @@
     box.addEventListener('change', apply); apply();
   }
   bindToggle('#opt-tl', 'no-tl'); bindToggle('#opt-en', 'no-en');
+  cls = store('cls') === '1' ? '1' : '3';
 
   /* ---------- card builders ---------- */
   function card(ta, tanglish, en, opts) {
@@ -68,7 +70,7 @@
   }
   function chipBar(el, items, onPick, key) {
     el.innerHTML = '';
-    var saved = store(key), first = items.filter(function (x) { return x.id === saved; })[0] || items[0];
+    key = key + cls; var saved = store(key), first = items.filter(function (x) { return x.id === saved; })[0] || items[0];
     items.forEach(function (it) {
       var c = document.createElement('button'); c.type = 'button'; c.className = 'chip';
       c.innerHTML = esc(it.en) + (it.ta ? ' <span class="ta">' + esc(it.ta) + '</span>' : '');
@@ -101,19 +103,23 @@
   })();
 
   /* ---------- words ---------- */
-  chipBar($('#topic-chips'), D.topics, function (tp) {
+  function renderClass() {
+  C = D['c' + cls];
+  document.body.classList.toggle('c1', cls === '1'); document.body.classList.toggle('c3', cls === '3');
+  document.querySelectorAll('.cls-switch button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cls === cls ? 'true' : 'false'); });
+  chipBar($('#topic-chips'), C.topics, function (tp) {
     var p = $('#topic-panel');
     p.innerHTML = '<div class="panel-head"><h3>' + esc(tp.en) + '</h3><span class="ta">' + esc(tp.ta) + '</span><span class="tl">' + esc(tl(tp.ta)) + '</span></div>';
     var g = document.createElement('div'); g.className = 'grid';
     tp.words.forEach(function (w) { g.appendChild(card(w[0], tl(w[0]), w[1], { pic: w[2] })); });
     p.appendChild(g);
   }, 'topic');
-  var ph = $('#phrases');
-  D.phrases.forEach(function (p) { ph.appendChild(lineRow(p[0], p[1])); });
+  var ph = $('#phrases'); ph.innerHTML = '';
+  C.phrases.forEach(function (p) { ph.appendChild(lineRow(p[0], p[1])); });
 
   /* ---------- grammar ---------- */
-  chipBar($('#grammar-chips'), D.grammar, function (g) {
-    var p = $('#grammar-panel'), taCols = g.cols.length - (g.id === 'tense' ? 0 : 1);
+  chipBar($('#grammar-chips'), C.grammar, function (g) {
+    var p = $('#grammar-panel'), taCols = g.taCols || (g.cols.length - (g.id === 'tense' ? 0 : 1));
     var h = '<div class="panel-head"><h3>' + esc(g.en) + '</h3><span class="ta">' + esc(g.ta) + '</span><span class="tl">' + esc(tl(g.ta)) + '</span></div>' +
       '<div class="note">' + esc(g.explain) + '</div><div class="scroll-x" style="border:0"><table class="list"><thead><tr>';
     g.cols.forEach(function (c) { h += '<th>' + esc(c) + '</th>'; });
@@ -134,7 +140,7 @@
   }, 'grammar');
 
   /* ---------- reading ---------- */
-  var reads = D.poems.concat(D.stories);
+  var reads = C.poems.concat(C.stories);
   chipBar($('#reading-chips'), reads, function (r) {
     var p = $('#reading-panel');
     p.innerHTML = '<div class="panel-head"><h3>' + esc(r.en) + '</h3><span class="ta">' + esc(r.ta) + '</span><span class="tl">' + esc(tl(r.ta)) + '</span></div>' +
@@ -163,9 +169,11 @@
   }, 'reading');
 
   /* ---------- quiz ---------- */
-  var allWords = []; D.topics.forEach(function (t) { t.words.forEach(function (w) { allWords.push({ ta: w[0], en: w[1], pic: w[2], topic: t.id }); }); });
+  var allWords = [], seen = {};
+  C.topics.forEach(function (t) { t.words.forEach(function (w) { if (seen[w[0]]) return; seen[w[0]] = 1; allWords.push({ ta: w[0], en: w[1], pic: w[2], topic: t.id }); }); });
   var allLetters = D.uyir.map(function (u) { return { ta: u[0], tl: u[1] }; }).concat(D.mei.map(function (m) { return { ta: m[0], tl: m[1] }; }));
-  D.uyirmeiCons.forEach(function (c, i) { D.uyirmeiSigns.forEach(function (s, j) { allLetters.push({ ta: c + s, tl: D.uyirmeiBase[i] + D.uyirmeiVowel[j] }); }); });
+  D.uyirmeiCons.forEach(function (c, i) { D.uyirmeiSigns.forEach(function (s, j) { if (cls === '1' && j > 1) return; allLetters.push({ ta: c + s, tl: D.uyirmeiBase[i] + D.uyirmeiVowel[j] }); }); });
+  function firstLetter(w) { var ch = Array.from(w); return /[\u0BBE-\u0BCD]/.test(ch[1] || '') ? ch[0] + ch[1] : ch[0]; }
   var quizzes = [
     { id:'letter', en:'Read the letter', make: function () {
       var a = pick(allLetters), opts = [a];
@@ -184,7 +192,14 @@
         label: function (o) { return '<span class="ta">' + esc(o.ta) + '</span><span class="tl q-tl" hidden>' + esc(tl(o.ta)) + '</span>'; } };
     }}
   ];
-  var score = { right: 0, total: 0 }, current;
+  if (cls === '1') quizzes.splice(1, 0, { id:'firstletter', en:'First letter', make: function () {
+      var a = pick(allWords.filter(function (w) { return w.topic !== 'numbers'; })), f = firstLetter(a.ta), opts = [f];
+      while (opts.length < 4) { var o = firstLetter(pick(allWords).ta); if (opts.indexOf(o) < 0) opts.push(o); }
+      return { main: a.pic, small: true, sub: '<b>' + esc(a.en) + '</b> · <span class="tl">' + esc(tl(a.ta)) + '</span><br>Which letter does it start with?', say: a.ta,
+        answer: { ta: f }, opts: shuffle(opts).map(function (x) { return x === f ? null : { ta: x }; }), firstKey: f,
+        label: function (o) { return '<span class="ta">' + esc(o.ta) + '</span>'; } };
+    }});
+  score = { right: 0, total: 0 };
   function renderQuiz(qz) {
     current = qz;
     var q = qz.make(), box = $('#quiz');
@@ -193,6 +208,7 @@
       (q.say ? '<button type="button" class="btn ghost" id="q-say">' + SPK + ' Hear it</button>' : '') +
       '<div class="options"></div><div class="feedback" aria-live="polite"></div><button type="button" class="btn" id="q-next">Next question</button>';
     var ops = box.querySelector('.options'), done = false;
+    if (q.firstKey) q.opts = q.opts.map(function (o) { return o || q.answer; });
     q.opts.forEach(function (o) {
       var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.innerHTML = q.label(o);
       b.addEventListener('click', function () {
@@ -211,6 +227,12 @@
     $('#q-next').onclick = function () { renderQuiz(current); };
   }
   chipBar($('#quiz-chips'), quizzes, function (qz) { renderQuiz(qz); }, 'quiz');
+  }
+  var score = { right: 0, total: 0 }, current;
+  document.querySelectorAll('.cls-switch button').forEach(function (b) {
+    b.addEventListener('click', function () { cls = b.dataset.cls; store('cls', cls); renderClass(); });
+  });
+  renderClass();
 
   /* ---------- tracing ---------- */
   (function () {
@@ -272,7 +294,9 @@
   /* ---------- routing ---------- */
   var views = ['start', 'letters', 'words', 'grammar', 'reading', 'practice', 'homework'];
   function route() {
-    var v = (location.hash || '#start').slice(1); if (views.indexOf(v) < 0) v = 'start';
+    var v = (location.hash || '#start').slice(1);
+    if (v === 'class1' || v === 'class3') { cls = v.slice(5); store('cls', cls); renderClass(); v = 'start'; }
+    if (views.indexOf(v) < 0) v = 'start';
     views.forEach(function (n) { $('#view-' + n).hidden = n !== v; });
     document.querySelectorAll('.tabs a').forEach(function (a) { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     if (v === 'practice') window._traceResize();

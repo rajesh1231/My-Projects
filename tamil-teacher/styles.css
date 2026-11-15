@@ -54,6 +54,11 @@ section.view { display: grid; gap: 22px; }
 body.no-tl .tl, body.no-en .en { visibility: hidden; }
 body.no-tl .tl.keep, body.no-en .en.keep { visibility: visible; }
 
+.cls-switch { display: inline-flex; border: 1px solid var(--leaf); border-radius: 999px; overflow: hidden; }
+.cls-switch button { border: 0; background: var(--surface); color: var(--leaf); padding: 5px 14px; font-weight: 700; font-size: .9rem; }
+.cls-switch button[aria-pressed="true"] { background: var(--leaf); color: var(--surface); }
+body.c1 [data-only="3"], body.c3 [data-only="1"] { display: none !important; }
+
 /* panels */
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 14px; min-width: 0; }
 .panel-head { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; }

@@ -1,10 +1,12 @@
 # Amma's Tamil Class
 
-A small website that helps a parent who cannot read Tamil teach Class 3 Tamil (CBSE, second language; works for Sri Chaitanya and similar schools).
+A small website that helps a parent who cannot read Tamil teach Class 1 and Class 3 Tamil (CBSE, second language; works for Sri Chaitanya and similar schools).
 
 Every Tamil word is shown with **Tanglish** (Tamil in English letters) and the **English meaning**, and can be heard aloud using the device's Tamil voice.
 
-## Sections
+Use the **Class 1 / Class 3** switch at the top. Direct links: `#class1`, `#class3`.
+
+## Sections (Class 3; Class 1 has simpler versions of each, plus a "first letter" game)
 - **Start here** – how to teach, how to read Tanglish, a weekly plan
 - **Letters** – 12 vowels, 18 consonants, full 216-letter uyirmei chart
 - **Words** – 13 topics (family, body, colours, numbers 1–100, animals, birds, fruits, vegetables, days, Tamil months, school, nature, action words) plus everyday phrases

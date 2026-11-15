@@ -221,3 +221,6 @@ DATA.stories = [
 ];
 
 if (typeof module !== 'undefined') module.exports = DATA;
+
+/* Class 3 set */
+DATA.c3 = { topics: DATA.topics, phrases: DATA.phrases, grammar: DATA.grammar, poems: DATA.poems, stories: DATA.stories };
